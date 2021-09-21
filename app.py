@@ -1,14 +1,9 @@
 from flask import Flask, render_template, request
 import cv2
-import extract as ext
-import glob
 
-
-# port = int(os.environ.get('PORT', 5000))
 UPLOAD_FOLDER = 'uploadFile'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.config["DEBUG"] = True
 
 
 @app.route('/')
@@ -41,21 +36,6 @@ def extract_frames():
     cv2.destroyAllWindows()
     print(i)
     print("made frames")
-    # gotta add photo enhance function and put into array and join
-    # img_array = []
-    # for filename in glob.glob('frames/*.jpg'):
-    #     img = cv2.imread(filename)
-    #     height, width, layers = img.shape
-    #     size = (width,height)
-    #     img_array.append(img)
- 
-    
-    # out = cv2.VideoWriter('final/final.mp4',cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
- 
-    # for i in range(len(img_array)):
-    #     out.write(img_array[i])
-    # out.release()
-    # print("ban gayi firse video") #can be find in final.mp4, should be given to users to download
     return str(i)
 
 
