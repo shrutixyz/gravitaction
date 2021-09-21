@@ -8,10 +8,13 @@
 </head>
 <body>
     <h1> checkk</h1>
-    <form action="/extract_frames/" method="post">
+    <!-- <form action="/extract_frames/" method="post">
         <button name="forwardBtn" type="submit">make frames</button>
+    </form> -->
+    <form action="{{url_for('extract_frames')}}" method="POST" enctype="multipart/form-data" class="form1">
+        <input type="file" name="file1" class="file1">
+        <input type="submit" name="btn" class="file1" value="Submit">
     </form>
-  
 </body>
 </html>
 {{i}}
