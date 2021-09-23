@@ -18,6 +18,24 @@ def enhance():
 def analyse():
     return render_template('analyse.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/analyse_results')
+def analyse_results():
+    return render_template('analyse_results.html')
+
+@app.route('/enhance_results')
+def enhance_results():
+    return render_template('enhance_results.html')
+
+
+
 @app.route("/extract_frames", methods=['POST'])
 def extract_frames():
     video = request.files['file1']
