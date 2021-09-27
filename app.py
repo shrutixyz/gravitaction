@@ -12,27 +12,20 @@ def index():
 
 @app.route('/enhance')
 def enhance():
-    return render_template('enhance.html')
+    return render_template('enhance/enhance.html')
 
 @app.route('/analyse')
 def analyse():
-    return render_template('analyse.html')
+    return render_template('analyse/analyse.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/analyse_results')
 def analyse_results():
-    return render_template('analyse_results.html')
+    return render_template('analyse/analyse_results.html')
 
 @app.route('/enhance_results')
 def enhance_results():
-    return render_template('enhance_results.html')
+    return render_template('enhance/enhance_results.html')
 
 
 
