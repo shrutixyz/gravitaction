@@ -5,17 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h1> checkk</h1>
+    
     <!-- <form action="/extract_frames/" method="post">
         <button name="forwardBtn" type="submit">make frames</button>
     </form> -->
+    <style>
+  .upload-btn{
+    height: 30rem;
+    width: 60%;
+    margin-top: 2rem;
+    color: 
+rgba(103, 103, 108, 1);
+border-radius: 3rem;
+    background-color: 
+rgba(53, 53, 55, 1);
+/* background: rgba(251, 189, 144, 1); */
+    border-color: rgba(53, 53, 55, 1);
+    border-style: solid; 
+}
+    </style>
+  <center> <div style="align-self: center; " >
     <form action="{{url_for('extract_frames')}}" method="POST" enctype="multipart/form-data" class="form1">
-        <input type="file" name="file1" class="file1">
-        <input type="submit" name="btn" class="file1" value="Submit">
-    </form>
+         <button class="upload-btn" onclick="document.getElementById('getFile').click()" type="button"><div>
+             <img src="../static/upload_cloud.svg" width="40%"/ >
+             <br><br><br>
+             <p>Upload a video (Max limit: 100MB/3min)</p>
+         </div></button>
+         <br>
+     <input type='file' id="getFile" style="display: none;" name="file1" ><br>
+         <!-- <input style="background-color: pink;" type="file" name="file1" class="file1" value="submit"> -->
+         <input type="submit" name="btn" class="file1" value="Proceed" style="color: black; background-color: 
+         rgba(251, 189, 144, 1); padding-top: 0.5rem; padding-bottom: 0.5rem; padding-right: 6rem; padding-left: 6rem;  
+     background: rgba(251, 189, 144, 1);
+     border-color: rgba(251, 189, 144, 1);
+     border-style: solid; border-radius: 0.7rem; ">
+     </form>
+    </div></center>
+    <br>
+
 </body>
 </html>
 {{i}}

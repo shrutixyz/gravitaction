@@ -10,3 +10,9 @@ h1{
      color: rgb(207, 201, 201); 
      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+
+.upload-btn{
+    height: 40rem;
+    color: red;
+}

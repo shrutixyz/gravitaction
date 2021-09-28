@@ -5,10 +5,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="../static/styles.css">
+    <title>Document</title>
 </head>
 <body>
-   <center> <h1>hello</h1></center>
+    
+    <!-- <form action="/extract_frames/" method="post">
+        <button name="forwardBtn" type="submit">make frames</button>
+    </form> -->
+    <style>
+  .photo{
+      height: 20rem;
+      width: 40rem;
+      background-color: black;
+  }
+  .photo-flex{
+      align-content: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-right:  10rem;
+      margin-left: 10rem;
+      align-items: center;
+  }
+  .bottom-flex{
+    align-content: center;
+    align-items: center;
+      display: flex;
+      flex-direction: row;
+      /* justify-content: space-around; */
+      margin-left:10rem ;
+  }
+    </style>
+<p style="color: white; font-size: 3rem; margin-left: 10rem;">Your video is ready for download</p>
+<p style="color: white; font-size: 1.5rem;  margin-left: 10rem;">Move the slider to see before/after</p>
+
+<div class="photo-flex">
+    <div class="photo">
+
+    </div>
+    <button   style="height: 4rem; background-color: 
+    rgba(53, 53, 55, 1); color: 
+rgba(251, 189, 144, 1); border-radius: 0.9rem; width: 30rem; border: none;">Preview random frames</button>
+</div>
+<br><br>
+<div class="bottom-flex">
+    
+    <button   style="height: 4rem; color: 
+    rgba(53, 53, 55, 1); background-color: 
+rgba(251, 189, 144, 1); border-radius: 0.9rem; width: 15rem; border: none;">Download</button>
+    <p style="color: white; margin-left: 2rem;">   Size: 50mb</p>
+</div>
 </body>
 </html>
+{{i}}
