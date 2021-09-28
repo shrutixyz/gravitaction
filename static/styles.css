@@ -1,3 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans|Poppins:400,700&display=swap");
+
+:root {
+      /* shades of accent*/
+  --clr-primary-1: #E0935B;
+  --clr-primary-2: #F5A266;
+  --clr-primary-3: #FBBD90;
+ 
+
+
+  /* lighter shades of primary color */
+  --clr-blue-6: #202F3A;
+  
+  
+    /* grey shades */
+  --clr-grey-1: #252528;
+  --clr-grey-2: #343335;
+  --clr-grey-3: #33333A;
+  --clr-grey-4: #C4C4C4;
+ 
+  --clr-grey-5: #1B191C;
+  --clr-cloud-grey: #67676C;
+  --clr-cloud-bg: #353537;
+ 
+  --clr-white: #fff;
+ 
+  --clr-black: #1F1E20;
+  --ff-primary: "Poppins", sans-serif;
+  --ff-secondary: "Josefin Sans", sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --max-width: 1170px;
+  --fixed-width: 620px;
+}
+
+
 body{
     background-color: rgba(31, 30, 32, 1);
 }
@@ -8,7 +47,7 @@ h1{
     font-size: 19px;
      margin-top: -1.8rem; 
      color: rgb(207, 201, 201); 
-     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+     font-family: var(--ff-secondary);
 }
 
 
