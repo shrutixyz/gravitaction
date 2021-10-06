@@ -13,7 +13,9 @@
         <div class="wrapper">
             <div class="left">
                 <div class="video">
-                    <h3>Press Record to start practising</h3>
+                    <video id="videostream"></video>
+                    <audio id="audiostream"></audio>
+                    <!-- <h3>Press Record to start practising</h3> -->
                 </div>
                 <div class="utility">
                     <div class="line">
@@ -22,12 +24,12 @@
                     <div class="center">
                         <div class="pause">
 
-                            <img src="../../static/record.svg" alt="record-btn" />
+                            <img src="../../static/record.svg" alt="record-btn" id="record-btn"/>
                             <p>Rec/Pause</p>
                         </div>
                         <div class="stop">
 
-                            <img src="../../static/stop.svg" alt="stop-btn" />
+                            <img src="../../static/stop.svg" alt="stop-btn" id="stop-btn"/>
                             <p>Stop</p>
                         </div>
                     </div>
@@ -45,5 +47,6 @@
         </div>
     </div>
 
+    <script src="../../static/analyse.js"></script>
 </body>
 </html>
