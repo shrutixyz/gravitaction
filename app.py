@@ -124,18 +124,20 @@ def extract_frames():
     videoclip.write_videofile("final_vid.mp4", fps=30, threads=1, codec="libx264")
     print("doneeeeeeeeee")
     video_size = os.stat('final_vid.mp4').st_size
-    img_before = Image.open("frames/5.png")
+    img_before = cv2.imread("frames/5.png")
     print("saving 5th frame")
-    img_after = Image.open("frames/enhanced/5.png")
-    img_before.save("static/5.png")
+    img_after = cv2.imread("frames/enhanced/5.png")
+    # img_before.save("static/5.png")
+    cv2.imwrite("static/5.png", img_before)
     print("saving 5th frame cont")
     percent = 100
-    img_after.save("static/5enh.png")
-    files = glob.glob('/frames/*.png')
+    cv2.imwrite("static/5enh.png", img_after)
+    # img_after.save("")
+    files = glob.glob('frames/*.png')
     for f in files:
         os.remove(f)
     print("removed earlier frames")
-    files = glob.glob('/frames/enhanced*.png')
+    files = glob.glob('frames/enhanced/*.png')
     for f in files:
         os.remove(f)    
     print("removed enhanced frames")
