@@ -32,7 +32,7 @@ recognition.addEventListener('result', e => {
     if (e.results[0].isFinal) {
 
         transcriptInput.appendChild(p)
-        
+        transcriptInput.scrollTop = transcriptInput.scrollHeight;
         // p = document.createElement('p');
         // transcriptInput.appendChild(p);
         // p.textContent = " "
