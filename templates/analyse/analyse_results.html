@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hey</title>
     <link rel="stylesheet" href="../static/styles.css">
+  
 </head>
 
 <body>
@@ -26,6 +27,7 @@ align-self: center;
             background-image: linear-gradient(to bottom right, #28597E, rgb(17, 16, 16),rgb(15, 15, 15), black);
         border-radius: 1rem;
           background-color: #f1f1f1;
+         
           width: 80%;
           margin: 3rem;
           height: 15rem;
@@ -43,16 +45,23 @@ align-self: center;
          /* background-color: pink; */
         }
         
+        .inside{
+          margin-top: 4rem;
+          margin-bottom: 3rem;
+          height: 8rem;
+          background-color: #202F3A;
+          border-radius: 1rem;
+        }
         .flex-container2 > div {
             
         
-          background-color: #f1f1f1;
+          background-color: transparent;
           width: 80%;
           margin: 3rem;
           height: 10rem;
-          text-align: center;
+          /* text-align: center;
           line-height: 75px;
-          font-size: 30px;
+          font-size: 30px; */
         }
 
         .ptop{
@@ -61,6 +70,7 @@ align-self: center;
         .pbottom{
             color: white; font-size: large; float: left; margin-top: 5rem; margin-left: -3rem;
         }
+   
         </style>
     <br><br>
     <h1 style="margin-left: 3rem;">Performance Analysis</h1>
@@ -71,12 +81,22 @@ align-self: center;
       </div></center>
       <br><br>
       <h1 style="margin-left: 3rem; font-size: smaller;">Most frequently used words</h1>
-      <h1>xyz here</h1>
+      <div class="barchart">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+
+<canvas id="horizontalBarChartCanvas"></canvas>
+      </div>
       <br><br>
       <center><div class="flex-container2">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div> 
+        <div><p class="ptop">Vocabulary Index</p><br>
+        <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">0.8</p></div>
+        </div>
+        <div><p class="ptop">Filler Word Count</p><br>
+          <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">69</p></div>
+          </div>
+          <div><p class="ptop">Banned Words Count</p><br>
+            <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">96</p></div>
+            </div>
       </div></center>
 </body>
 </html>

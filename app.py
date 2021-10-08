@@ -85,14 +85,9 @@ def extract_frames():
         print("open frame for scaling")
         # img_isr.resize(size=(img_isr.size[0]*4, img_isr.size[1]*4), resample=Image.BICUBIC)
         print("beginning averaging")
-        median = cv2.medianBlur(img_isr,5)
+        median = cv2.medianBlur(img_isr,2)
         print("avg done")
         Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
-        # median.cv2.imwrite('frames/enhanced/'+str(i))
-        # sr_img = model.predict(np.array(img_isr))
-        # print("resize done")
-        # image_enhanced = Image.fromarray(sr_img)
-        # image_enhanced.save('frames/enhanced'+str(i)+'.png', 'PNG')
         print("new image saved")
         print("i is" + str(i))
         i+=1
@@ -146,6 +141,8 @@ def extract_frames():
         os.remove(f)    
     print("removed enhanced frames")
     os.remove("final_vid.avi")
+    os.remove("video/video.mp4")
+    os.remove("audio/audio.mp3")
     return render_template("enhance/enhance_results.html", video_size = round(video_size/1048576, 2))
 
 
