@@ -1,3 +1,5 @@
+
+
 {% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Ecstatic - Home</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}">
+    
     <link href="../static/styles.css" rel="stylesheet" type="text/css" >
 </head>
 <!-- <style >
@@ -31,11 +36,24 @@
     </style>
    
     <br><br>
-    <button onclick="window.location.href='/enhance'">enhance videos</button>
-    <button onclick="window.location.href='/analyse'">analyse videos</button>
+    <p style="color: white; font-weight: bolder; font-size: 3rem; margin-left: 3rem;">Make awesome <br> <span style="color: rgba(251, 189, 144, 1);">content and presentations.</span></p><br>
+    <p style="color: white; margin-left: 3rem; margin-top: -2rem;">Ecstatic let's you analyze your presentation skills on<br>grounds like tone, confidence, speed, etc. Also, you can<br>enhance your old/low quality videos and make them look<br>newer and better than ever!!</p>
+    <br>
+    <br>
+    <button onclick="window.location.href='/select'" style="height: 3rem; 
+    margin-left: 3rem;
+    color: 
 
-    <img src="../static/right-container.svg" alt="" style="float: right; height: 80%; margin-top: -8rem; width: 20rem;">
-    <div class="overlay"></div>
+    rgba(53, 53, 55, 1); background-color: 
+rgba(251, 189, 144, 1); border-radius: 0.9rem; width: 15rem; border: none; ">Try it out!</button>
+  <button onclick="window.location.href='/select'" style="height: 3rem; color: 
+rgba(251, 189, 144, 1)  ; background-color: 
+rgba(53, 53, 55, 1); border-radius: 0.9rem; width: 15rem; border: none; ">Watch Demo</button>
+    <!-- <button onclick="window.location.href='/select'">Try it out!</button> -->
+    <!-- <button onclick="window.location.href='https://devpost.com/software/ecstatic'">Watch demo</button> -->
+
+    <div class="contain" style="margin-top: -25rem;"><img src="../static/right-container.svg" alt="" style="float: right; height: 80%; margin-top: -8rem; width: 20rem;">
+        <div class="overlay"></div></div>
 </body>
 
 </html>

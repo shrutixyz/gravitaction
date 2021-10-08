@@ -22,6 +22,10 @@ message = "Enhancing your awesome video..."
 def index():
     return render_template('index.html')
 
+@app.route('/select')
+def select():
+    return render_template('select.html')
+
 @app.route('/enhance')
 
 def enhance():
