@@ -26,6 +26,10 @@ def index():
 def select():
     return render_template('select.html')
 
+@app.route('/test')
+def test():
+    return render_template('test2.html')
+
 @app.route('/enhance')
 
 def enhance():
@@ -44,9 +48,6 @@ def analyse_results():
 def enhance_results():
     return render_template('enhance/enhance_results.html')
 
-@app.route('/test')
-def test():
-    return render_template('enhance/test.html')
 
 @app.route('/download')
 def downloadFile ():
