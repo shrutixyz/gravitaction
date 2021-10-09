@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var count = 0;
+        var moveCount = 0;
+        var before = 0;
+        async function setupCamera(videoElement) {
+  const constraints = {video: {width: 320,height: 240}, audio: false};
+  const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  videoElement.srcObject = stream;
+  return new Promise(resolve => {
+    videoElement.onloadedmetadata = () => {
+      videoElement.play();
+      resolve();
+    };
+  });
+}
+
+function startRender(input, output, model) {
+  const ctx = output.getContext("2d");
+  async function renderFrame() {
+    requestAnimationFrame(renderFrame);
+    const faces = await model.estimateFaces(input, false, false);
+    ctx.clearRect(0, 0, output.width, output.height);
+    faces.forEach(face => {
+      face.scaledMesh.forEach(xy => {
+          count++;
+        ctx.beginPath();
+        ctx.arc(xy[0], xy[1], 1, 0, 2 * Math.PI);
+        ctx.fill();
+        if(Math.abs(xy[0]-before)>10){
+            moveCount++;
+        }
+        before = xy[0]
+        console.log(xy[0])
+      });
+    });
+  }
+  renderFrame();
+}
+
+function showResults(){
+    console.log("move"+moveCount);
+    console.log("count" + count);
+    var raw = moveCount*165/count;
+    console.log("raw: "+raw);
+var final = 30;
+    if(moveCount*165/count >90){
+final = (90-moveCount/count); 
+    }
+    else{
+        final  = raw + 5;
+    }
+    if(final<30){
+        final = 35;
+    }
+    window.alert("your score is" + final + "%");
+}
+
+function loading(onoff) {
+  document.getElementById("loadingicon").style.display = onoff ? "inline" : "none";
+}
+
+async function start() {
+  const input = document.getElementById("input");
+  const output = document.getElementById("output");
+  loading(true);
+  await setupCamera(input);
+  const model = await facemesh.load({ maxFaces: 1 });
+  startRender(input, output, model);
+  loading(false);
+}
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+<p><button onclick="start()">start</button></p>
+<p><button onclick="showResults()">stop</button></p>
+<div>
+<video id='input' width="320" height="240" autoplay muted playsinline style="border:solid 1px black;box-sizing:content-box;display:inline-block;"></video><span style="position:relative;display:inline-block;"><span id='loadingicon' class="fa fa-spinner fa-spin" style="position:absolute;font-size:100px;margin:70px 110px;display:none;"></span><canvas id='output' width="320" height="240" style="border:solid 1px black;box-sizing:content-box;"></canvas></span>
+</div>
+
+</body>
+</html>
