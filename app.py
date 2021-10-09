@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-model = RDN(weights='noise-cancel')
+# model = RDN(weights='noise-cancel')
 message = "Enhancing your awesome video..."
 
 @app.route('/')
