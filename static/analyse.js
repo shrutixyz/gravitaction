@@ -3,6 +3,8 @@ const audio = document.querySelector('#audiostream');
 const recordBtn = document.querySelector('#record-btn');
 const stopBtn = document.querySelector('#stop-btn');
 const transcriptInput = document.querySelector('.subtitle');
+
+const resultTranscript = document.querySelector('#transcript-result');
   
 //initialise speech recog
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -11,7 +13,7 @@ window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogn
 const recognition = new SpeechRecognition();
 recognition.interimResults = true;
 recognition.lang = 'en-US';
-recognition.continuous = true;
+// recognition.continuous = true;
 
 let p = document.createElement('p');
 let r;
@@ -33,9 +35,7 @@ recognition.addEventListener('result', e => {
 
         transcriptInput.appendChild(p)
         transcriptInput.scrollTop = transcriptInput.scrollHeight;
-        // p = document.createElement('p');
-        // transcriptInput.appendChild(p);
-        // p.textContent = " "
+        
     }
         
 });
@@ -44,6 +44,7 @@ recognition.addEventListener('end', () => {
     if(video.classList.contains('play')){
         console.log('restart')
         recognition.start()
+        transcriptInput.innerText += "...."
     }
 });
 
