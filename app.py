@@ -37,14 +37,14 @@ def enhance():
 
 @app.route('/analyse', methods = ['GET', 'POST'])
 def analyse():
-    form_res = ""
+    form = ""
     if request.method == 'POST':
         form = request.form
         transcriptResult = request.form.getlist('ans')
-
-        print(transcriptResult, "here")
-        # print(form, "made a req")
-    return render_template('analyse/analyse.html', form_res = form)
+        clockResult = request.form.getlist('time')
+        print(transcriptResult, clockResult ,"here")
+        print(form, "made a req")
+    return render_template('analyse/analyse.html', form = form)
 
 
 @app.route('/analyse_results')

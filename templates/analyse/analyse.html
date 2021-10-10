@@ -10,8 +10,18 @@
 </head>
 <body>
     <div class="container">
+        <div class="clock-wrapper">
+            <div class="clock">
+                <span id="minutes">00</span>:<span id="seconds">00</span>
+            </div>
+            <p>Time</p>
+        </div>
+        
+        <br><br>
         <div class="wrapper">
+            
             <div class="left">
+                
                 <div class="video">
                     <video id="videostream" muted="muted"></video>
                     <audio id="audiostream"></audio>
@@ -49,6 +59,7 @@
                 </div>
                 <form action="{{ url_for('analyse') }}" method="POST">
                     <input type="text" name="ans" id="transcript-result">
+                    <input type="text" name="time" id="clock-result">
                     <button type="submit" id="submit-btn">See Results</button>
                 </form>
             </div>
