@@ -1,4 +1,4 @@
-text = "following the suggestions from his mother on 11th April 2010 styles auditioned as a solo contestant ...... so basically for the 7 series of the British revised singing competition called as factor singing a retention of Stevie wonder's isn't she lovely ..."
+text = "following the suggestions from his f***ing mother on 11th April 2010 styles auditioned as a solo contestant ...... so basically for the 7 series of the British revised singing competition called as factor singing a retention of Stevie wonder's isn't she lovely ..."
 
 # text = "Graphology inference of character from a person's handwriting The theory underlying graphology is that handwriting is an expression of personality hence a systematic analysis of the way words and letters are formed can reveal traits of personality"
 
@@ -9,14 +9,20 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 
+from collections import Counter
 
 from nltk.stem import PorterStemmer
+from nltk.util import pr
 
 tool = language_tool_python.LanguageTool('en-US')
 
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
+from nltk.corpus import wordnet
+
 
 def grammar_check(text):
     t = text.replace(".", "")
@@ -44,7 +50,12 @@ def grammar_check(text):
 
 
 def pace(text, time):
-    pass
+    words = split_words(text)
+    total_words = len(words)
+
+    limit = (total_words // time) * 60
+
+    return limit
 
 
 def tone(text):
@@ -70,7 +81,14 @@ def preprocess(text):
     
     return pre
 
+def split_words(text):
+    text = text.replace(".", "")
+    words = text.split(" ")
 
+    for word in words:
+        if len(word) < 1:
+            words.remove(word)
+    return words
 
 def get_common_words(text):
     
@@ -93,8 +111,8 @@ def get_common_words(text):
                 vocab.append(word)
     
     numerator = len(vocab)
-    l = text.replace(".","")
-    temp = l.split(" ")
+   
+    temp = split_words(text)
     
     
     
@@ -123,8 +141,8 @@ def get_filler(text):
     for l in line:
         lines.append(l[:-1])
 
-    l = text.replace(".","")
-    words = l.split(" ")
+    
+    words = split_words(text)
 
     for word in words:
         if word in lines and word not in filler:
@@ -134,9 +152,48 @@ def get_filler(text):
 
 
 def most_frequently_words(text):
-    pass
 
-ans = get_filler(text)
-print(ans)
+    #preprocess
+    words = split_words(text)
+
+    stop_words = set(stopwords.words('english'))
+
+    
+    words = [w.lower() for w in words if not w in stop_words] 
+    
+    for word in words:
+        if bool(re.search(r'\d', word)):
+            words.remove(word)
+
+    #get freq
+    ref = Counter(words)
+
+    ans = sorted(ref.items(), key=lambda item: item[1])
+    ans = ans[::-1]
+    
+    return ans
+    
+
+def getsynonyms(word):
+
+    #Creating a list 
+    synonyms = []
+    for syn in wordnet.synsets(word):
+        for lm in syn.lemmas():
+                synonyms.append(lm.name())#adding into synonyms
+    return (set(synonyms))
+
+
+def banned_words(text):
+
+    words = split_words(text)
+    count = 0
+    for word in words:
+        if "*" in word:
+            count += 1
+    return count 
+
+
+
 
     
