@@ -163,7 +163,9 @@ hr {
     overflow-y: scroll;
 }
 
-
+#transcript-result {
+    visibility: hidden;
+}
 
 
 

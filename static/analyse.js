@@ -2,6 +2,7 @@ const video = document.querySelector('#videostream');
 const audio = document.querySelector('#audiostream');
 const recordBtn = document.querySelector('#record-btn');
 const stopBtn = document.querySelector('#stop-btn');
+const submitBtn = document.querySelector('#submit-btn');
 const transcriptInput = document.querySelector('.subtitle');
 
 const resultTranscript = document.querySelector('#transcript-result');
@@ -44,7 +45,7 @@ recognition.addEventListener('end', () => {
     if(video.classList.contains('play')){
         console.log('restart')
         recognition.start()
-        transcriptInput.innerText += "...."
+        transcriptInput.innerText += "..."
     }
 });
 
@@ -86,3 +87,9 @@ stopBtn.addEventListener('click', e => {
 
     video.classList.remove('play')
  })
+
+
+submitBtn.addEventListener('click', e => {
+    resultTranscript.value = transcriptInput.textContent;
+    console.log(resultTranscript.value)
+})
