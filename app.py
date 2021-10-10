@@ -86,7 +86,7 @@ def extract_frames():
         print("open frame for scaling")
         # img_isr.resize(size=(img_isr.size[0]*4, img_isr.size[1]*4), resample=Image.BICUBIC)
         print("beginning averaging")
-        median = cv2.detailEnhance(img_isr, sigma_s=10, sigma_r=0.15)
+        median = cv2.GaussianBlur(img_isr,(1,1),cv2.BORDER_DEFAULT)
         print("avg done")
         Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
         print("new image saved")
