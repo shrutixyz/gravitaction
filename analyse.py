@@ -113,4 +113,30 @@ def get_common_words(text):
     
 
 def get_filler(text):
+    
+    #read filler words from txt file
+    lines = []
+    filler = []
+    with open('filler.txt') as f:
+        line = f.readlines()
+        
+    for l in line:
+        lines.append(l[:-1])
+
+    l = text.replace(".","")
+    words = l.split(" ")
+
+    for word in words:
+        if word in lines and word not in filler:
+            filler.append(word)
+
+    return filler
+
+
+def most_frequently_words(text):
     pass
+
+ans = get_filler(text)
+print(ans)
+
+    
