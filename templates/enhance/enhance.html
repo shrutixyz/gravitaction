@@ -70,15 +70,19 @@ rgba(53, 53, 55, 1);
             $("#loading").show();
             $("#content").hide();       
         }
+
+        var intervalId = window.setInterval(function(){
+            document.getElementById('loading-text').innerHTML = "enhancing your awesome video";
+}, 500);
         var msg = "enhancing your awesome video"
         window.onload = function(){
+            
     
-    document.getElementById('loading-text').innerHTML = msg;
 };
 
 // ]]></script>
   <center> 
-    <div id="loading"><p id="loading-text" style="color: white; font-size: large;">ecstatic</p>
+    <div id="loading"><p id="loading-text" style="color: white; font-size: large;">enhancing your awesome video</p>
         <div class="progress">
             <span class="progress-bar" ></span>
           </div>
