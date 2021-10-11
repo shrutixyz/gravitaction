@@ -8,6 +8,7 @@ from flask import send_file
 import os
 import glob
 from moviepy.editor import *
+from PIL import ImageEnhance
 
 percent = 10
 UPLOAD_FOLDER = 'uploadFile'
@@ -57,20 +58,25 @@ def downloadFile ():
 
 @app.route('/progress')
 def progress():
-    return render_template('enhance/progress.html')
+    return send_file("progress.txt")
 
 @app.route("/extract_frames", methods=['POST'])
 def extract_frames():
     video = request.files['file1']
-    message = "uploading to server... [1/8]"
     video.save('video/video.mp4')
     print("vid saved")
     global percent
+    file_prog = open("progress.txt","w")
     percent = 10
+    file_prog.write(str(percent))
+    file_prog.close()
     my_clip = mp.VideoFileClip(r"video/video.mp4")
     my_clip.audio.write_audiofile(r"audio/audio.mp3")
     print("audio extracted")
     percent = 30
+    file_prog = open("progress.txt","w")
+    file_prog.write(str(percent))
+    file_prog.close()
     print("started")
     cap= cv2.VideoCapture('video/video.mp4') # add file path here dynamically
     cap.set(cv2.CAP_PROP_FPS, 60) # this isnt working rn idk why, taking 30fps only
@@ -82,13 +88,17 @@ def extract_frames():
             break
         cv2.imwrite('frames/'+str(i)+'.png',frame)
         print("Frame saved")
-        img_isr = cv2.imread('frames/'+str(i)+'.png')
+        # img_isr = cv2.imread('frames/'+str(i)+'.png')
+        img_isr =  Image.open('frames/'+str(i)+'.png')
         print("Frame opened for scaling")
         # img_isr.resize(size=(img_isr.size[0]*4, img_isr.size[1]*4), resample=Image.BICUBIC)
         # print("beginning averaging")
-        median = cv2.GaussianBlur(img_isr,(1,1),cv2.BORDER_DEFAULT)
+        color = ImageEnhance.Color(img_isr)
+        image_colored = color.enhance(1.5)
+        # median = cv2.GaussianBlur(img_isr,(1,1),cv2.BORDER_DEFAULT)
         print("Filter applied")
-        Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
+        image_colored.save('frames/enhanced/'+str(i)+'.png')
+        # Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
         print("new image saved")
         print("The frame number is" + str(i))
         i+=1
@@ -97,6 +107,9 @@ def extract_frames():
     print(i)
     print("made frames")
     percent = 70
+    file_prog = open("progress.txt","w")
+    file_prog.write(str(percent))
+    file_prog.close()
     # os.system("ffmpeg -r 30 -i frames/enhanced/img%01d.png -vcodec mpeg4 -y final_vid.mp4")
     print("Joining the frames started")
     img_array = []
@@ -111,6 +124,9 @@ def extract_frames():
     out = cv2.VideoWriter('final_vid.avi',cv2.VideoWriter_fourcc(*'DIVX'), 30, size)
     print("Video released")
     percent = 80
+    file_prog = open("progress.txt","w")
+    file_prog.write(str(percent))
+    file_prog.close()
     for i in range(len(img_array)):
         out.write(img_array[i])
     out.release()
@@ -121,6 +137,9 @@ def extract_frames():
     print("finalizing audio")
     videoclip = clip.set_audio(audioclip)
     percent = 90
+    file_prog = open("progress.txt","w")
+    file_prog.write(str(percent))
+    file_prog.close()
     videoclip.write_videofile("final_vid.mp4", fps=30, threads=1, codec="libx264")
     print("FINAL VIDEO PROCESSING DONE")
     video_size = os.stat('final_vid.mp4').st_size
@@ -131,6 +150,9 @@ def extract_frames():
     cv2.imwrite("static/5.png", img_before)
     # print("saving 5th frame cont")
     percent = 100
+    file_prog = open("progress.txt","w")
+    file_prog.write(str(percent))
+    file_prog.close()
     cv2.imwrite("static/5enh.png", img_after)
     # img_after.save("")
     files = glob.glob('frames/*.png')
@@ -151,3 +173,31 @@ if __name__ == "__main__":
 
 
 
+
+# import cv2
+# import numpy as np
+# from PIL import Image 
+# from PIL import ImageEnhance
+
+# img_isr = cv2.imread('test2.png')
+# print("Frame opened for scaling")
+# img = Image.open('test2.png')
+# # median = cv2.GaussianBlur(img_isr,-1, (9,9),cv2.BORDER_DEFAULT)
+# # filterbaamzi = cv2.filter2D(src=image, ddepth=-1, (3,3))
+# # box = cv2.boxFilter(img_isr, -1, (10, 10), normalize=True)
+# bright = ImageEnhance.Brightness(img)
+# image_brightened = bright.enhance(1.5)
+# color = ImageEnhance.Color(img)
+# image_colored = color.enhance(1.5)
+# contrast = ImageEnhance.Contrast(img)
+# image_contrasted = contrast.enhance(1.5)
+# sharp = ImageEnhance.Sharpness(img)
+# image_sharped = sharp.enhance(1.5)
+# box = cv2.bilateralFilter(img_isr, 5, 10, 10) 
+# image_brightened.save('bright.png')
+# image_colored.save("colored.png")
+# image_contrasted.save("constrast.png")
+# image_sharped.save("sharp.png")
+# print("Filter applied")
+# # Image.fromarray(median).save('gaussian.png')
+# Image.fromarray(box).save('box.png')

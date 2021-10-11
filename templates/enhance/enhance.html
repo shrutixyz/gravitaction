@@ -70,11 +70,17 @@ rgba(53, 53, 55, 1);
             $("#loading").show();
             $("#content").hide();       
         }
-
+        var prog = "0"
         var intervalId = window.setInterval(function(){
-            document.getElementById('loading-text').innerHTML = "enhancing your awesome video";
+         
+          var msg = "enhancing your awesome video - " + prog + "% done"
+          
+fetch('../static/progress.txt')
+  .then(response => response.text())
+  .then(text => prog = text);
+
+            document.getElementById('loading-text').innerHTML = msg;
 }, 500);
-        var msg = "enhancing your awesome video"
         window.onload = function(){
             
     
