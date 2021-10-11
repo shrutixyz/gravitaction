@@ -8,6 +8,7 @@ from flask import send_file
 import os
 import glob
 from moviepy.editor import *
+from PIL import ImageEnhance
 
 percent = 10
 UPLOAD_FOLDER = 'uploadFile'
@@ -62,16 +63,12 @@ def downloadFile ():
     path = "final_vid.mp4"
     return send_file(path, as_attachment=True)
 
-@app.route('/progress')
-def progress():
-    return render_template('enhance/progress.html')
 
 
 
 @app.route("/extract_frames", methods=['POST'])
 def extract_frames():
     video = request.files['file1']
-    message = "uploading to server... [1/8]"
     video.save('video/video.mp4')
     print("vid saved")
     global percent
@@ -82,7 +79,7 @@ def extract_frames():
     percent = 30
     print("started")
     cap= cv2.VideoCapture('video/video.mp4') # add file path here dynamically
-    cap.set(cv2.CAP_PROP_FPS, 60) # this isnt working rn idk why, taking 30fps only
+    # cap.set(cv2.CAP_PROP_FPS, 60) # this isnt working rn idk why, taking 30fps only
     i=0
 
     while(cap.isOpened()):
@@ -91,13 +88,17 @@ def extract_frames():
             break
         cv2.imwrite('frames/'+str(i)+'.png',frame)
         print("Frame saved")
-        img_isr = cv2.imread('frames/'+str(i)+'.png')
+        # img_isr = cv2.imread('frames/'+str(i)+'.png')
+        img_isr =  Image.open('frames/'+str(i)+'.png')
         print("Frame opened for scaling")
         # img_isr.resize(size=(img_isr.size[0]*4, img_isr.size[1]*4), resample=Image.BICUBIC)
         # print("beginning averaging")
-        median = cv2.GaussianBlur(img_isr,(1,1),cv2.BORDER_DEFAULT)
+        color = ImageEnhance.Color(img_isr)
+        image_colored = color.enhance(1.5)
+        # median = cv2.GaussianBlur(img_isr,(1,1),cv2.BORDER_DEFAULT)
         print("Filter applied")
-        Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
+        image_colored.save('frames/enhanced/'+str(i)+'.png')
+        # Image.fromarray(median).save('frames/enhanced/'+str(i)+'.png')
         print("new image saved")
         print("The frame number is" + str(i))
         i+=1
@@ -160,3 +161,31 @@ if __name__ == "__main__":
 
 
 
+
+# import cv2
+# import numpy as np
+# from PIL import Image 
+# from PIL import ImageEnhance
+
+# img_isr = cv2.imread('test2.png')
+# print("Frame opened for scaling")
+# img = Image.open('test2.png')
+# # median = cv2.GaussianBlur(img_isr,-1, (9,9),cv2.BORDER_DEFAULT)
+# # filterbaamzi = cv2.filter2D(src=image, ddepth=-1, (3,3))
+# # box = cv2.boxFilter(img_isr, -1, (10, 10), normalize=True)
+# bright = ImageEnhance.Brightness(img)
+# image_brightened = bright.enhance(1.5)
+# color = ImageEnhance.Color(img)
+# image_colored = color.enhance(1.5)
+# contrast = ImageEnhance.Contrast(img)
+# image_contrasted = contrast.enhance(1.5)
+# sharp = ImageEnhance.Sharpness(img)
+# image_sharped = sharp.enhance(1.5)
+# box = cv2.bilateralFilter(img_isr, 5, 10, 10) 
+# image_brightened.save('bright.png')
+# image_colored.save("colored.png")
+# image_contrasted.save("constrast.png")
+# image_sharped.save("sharp.png")
+# print("Filter applied")
+# # Image.fromarray(median).save('gaussian.png')
+# Image.fromarray(box).save('box.png')
