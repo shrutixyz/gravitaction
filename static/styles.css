@@ -38,7 +38,7 @@
 
 
 body{
-    background-color: rgba(31, 30, 32, 1);
+    /* background-color: rgba(31, 30, 32, 1); */
     
     
 }
@@ -184,9 +184,7 @@ hr {
     color:  var(--clr-grey-4);
 }
 
-#output {
-    display: none;
-}
+
 
 #submit-btn {
     color: var(--clr-grey-1);

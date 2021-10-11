@@ -26,12 +26,12 @@
             <div class="left">
                 
                 <div class="video">
-                    <video width="320" height="240" id="videostream" muted="muted"></video>
+                    <video id='videostream' width="320" height="240" autoplay muted playsinline style="border:solid 1px black;box-sizing:content-box;display:inline-block;"></video><span style="position:relative;display:inline-block;"><span id='loadingicon' class="fa fa-spinner fa-spin" style="position:absolute;font-size:100px;margin:70px 110px;display:none;"></span><canvas id='output' width="320" height="240" style="border:solid 1px black;box-sizing:content-box;"></canvas></span>
                     
                     <audio id="audiostream"></audio>
                     <!-- <h3>Press Record to start practising</h3> -->
                 </div>
-                <canvas id="output"></canvas>
+               
                 <div class="utility">
                     <div class="line">
                         <hr>
