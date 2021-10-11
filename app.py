@@ -164,6 +164,11 @@ def extract_frames():
     return render_template("enhance/enhance_results.html", video_size = round(video_size/1048576, 2))
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 

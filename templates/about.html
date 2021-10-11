@@ -5,9 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Document</title>
 </head>
+
 <body>
-    <p>about</p>
+    <style>
+        .title{
+            margin-top: 3rem;
+            margin-left: 3rem;
+            font-size: 3rem;
+            color: white;
+        }
+        .text-body{
+            margin-top: 3rem;
+            margin-left: 3rem;
+            margin-right: 3rem;
+            font-size: 1.8rem;
+            color: rgb(223, 221, 221);
+            margin-bottom:10rem;
+        }
+    </style>
+    <p class="title">About Ecstatic</p>
+    <p class="text-body">Videos are a very important part of life, even more in this totally digitalized world. People capture moments, for fun and entertainment, and for many of us, its either partially or totally related to work. Also, since the world has seen a really new level of digital revolution in each and every field, people are more dependent on technology than ever, which in fact, is actually good! We wanted to help out people who'd want to do nice things with the videos they capture, or maybe the people who are into public speaking and are tryna to transition into the digital mode, literally anyone we feel, because everyone's a creator in some way or the other!<br><br>Ecstatic lets you do a lot. For the major part, its subdivided into two main sections:-<br>
+        - Enhance Videos <br>
+        It lets user upload their video, probably a low quality one so that ecstatic can enhance them, and then the work starts to happen behind the scene. The audio is extracted first, and then the video is broken down frame-by-frame. And then through the help of python libraries like MoviePy and OpenCV, each and every frame is enhanced using filters such as median blur, gaussian blur. Then at last, the frames are joined again and the audio is added as well and the output file is ready to be downloaded by the user!
+        Once the final video is ready, the script performs a cleanup and deleted all the files taken from user!
+        - Analyze Speeches/Presentations <br>
+        In this section, user just need to start recording [they should give mic and camera access to the browser] and then they can continue the speech or presentation like a rehearsal. Ecstatic would then perform various things, including-<br>
+           - Speech to text, which in turn performs grammar check and tells the score.
+           - Vocabulary index, which analyses how good was users vocabulary and usage of words.
+           - Confidence, if the user seemed confident enough while delivering their content.
+           - Tone analyser, using the audio extracted.
+           - Pace of speech, by dividing the total words spoken by total time taken.</p>
+
+    <p class="title">How it works?</p>
+    <p class="text-body">- As the basic framework for our app, we used python's flask library.
+        - The webpages are made and designed using HTML5 and CSS3
+        - To enhance videos, we used OpenCV that breaks it down into frames, and applies filter. To extract the audio, we used MoviePy library and the same was used to join frames as well as to add back the audio.
+        - To analyse speeches, we used IBM's speech recognition to get the transcript, OpenCV to check face's position to calculate confidence score, grammar checker to check grammar lol.
+        - The whole flask application is deployed on graviton based EC2 instances.</p>
+
+    <p class="title">Testimonials</p>
+    <p style="color: white; font-size: 2rem; margin-left: 3rem; margin-top: 3rem;">Before/After</p>
+    <iframe width="560" height="315" style="margin-left: 3rem;" src="https://www.youtube.com/embed/BuPfGjpAt7g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="560" height="315" style="margin-left: 3rem;" src="https://www.youtube.com/embed/BuPfGjpAt7g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <br><Br><br>
+    <p class="title">Privacy Policy</p>
+    <p class="text-body">We assure that all the data of user that is taken is never stored in our database. The analysis part is done in real time, so we dont store that data even temporarily. For the enhancement part, the frames are deleted as soon as the processing is done, and the video is deleted in a short while after that!</p>
+
 </body>
 </html>
