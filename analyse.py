@@ -167,8 +167,12 @@ def most_frequently_words(text):
 
     #get freq
     ref = Counter(words)
+    a = {}
+    for word in ref:
+        if ref[word] > 1:
+            a[word] = ref[word]
 
-    ans = sorted(ref.items(), key=lambda item: item[1])
+    ans = sorted(a.items(), key=lambda item: item[1])
     ans = ans[::-1]
     
     return ans
@@ -193,7 +197,7 @@ def banned_words(text):
             count += 1
     return count 
 
-
-
+# print(most_frequently_words(text))
+print(getsynonyms("apprehensive"))
 
     

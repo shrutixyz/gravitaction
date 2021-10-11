@@ -31,7 +31,7 @@
             <div class="left">
                 
                 <div class="video">
-                    <video id='videostream' width="320" height="240" autoplay muted playsinline style="border:solid 1px black;box-sizing:content-box;display:inline-block;"></video><span style="position:relative;display:inline-block;"><span id='loadingicon' class="fa fa-spinner fa-spin" style="position:absolute;font-size:100px;margin:70px 110px;display:none;"></span><canvas id='output' width="320" height="240" style="border:solid 1px black;box-sizing:content-box;"></canvas></span>
+                    <video id='videostream' width="320" height="240" autoplay muted playsinline style="box-sizing:content-box;display:inline-block;"></video><span style="position:relative;display:inline-block;"><span id='loadingicon' class="fa fa-spinner fa-spin" style="position:absolute;font-size:100px;margin:70px 110px;display:none;"></span><canvas id='output' width="320" height="240" style="border:solid 1px black;box-sizing:content-box;"></canvas></span>
                     
                     <audio id="audiostream"></audio>
                     <!-- <h3>Press Record to start practising</h3> -->
@@ -70,6 +70,7 @@
                 <form action="{{ url_for('analyse') }}" method="POST">
                     <input type="text" name="ans" id="transcript-result">
                     <input type="text" name="time" id="clock-result">
+                    <input type="text" name="confidence" id="confidence-result">
                     <button type="submit" id="submit-btn">See Results</button>
                 </form>
             </div>

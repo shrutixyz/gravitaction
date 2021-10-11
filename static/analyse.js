@@ -11,6 +11,7 @@ const secondsDiv = document.getElementById('seconds');
 
 const resultTranscript = document.querySelector('#transcript-result');
 const resultClock = document.querySelector('#clock-result');
+const resultConfidence = document.querySelector('#confidence-result');
 
 //initialise time
 var timerVar;
@@ -71,7 +72,7 @@ function showResults(){
     if(final<30){
         final = 35;
     }
-    window.alert("your score is" + final + "%");
+    return final
 }
 
 recognition.addEventListener('result', e => {
@@ -173,7 +174,7 @@ stopBtn.addEventListener('click', e => {
 
 submitBtn.addEventListener('click', e => {
     e.preventDefault()
-    showResults()
+    const confidence = showResults()
     resultTranscript.value = transcriptInput.textContent;
 
   
@@ -183,7 +184,9 @@ submitBtn.addEventListener('click', e => {
     time = m * 60 + s
     resultClock.value = time;
 
+    resultConfidence.value = confidence;
 
-    console.log(time)
+
+    console.log(resultConfidence.value)
 })
 
