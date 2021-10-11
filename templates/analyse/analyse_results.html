@@ -54,7 +54,7 @@ align-self: center;
         }
         .flex-container2 > div {
             
-        
+     
           background-color: transparent;
           width: 80%;
           margin: 3rem;
@@ -68,9 +68,47 @@ align-self: center;
             color: rgb(219, 216, 216); margin-left: 2rem; float: left; margin-top: 2rem;
         }
         .pbottom{
+          
             color: white; font-size: large; float: left; margin-top: 5rem; margin-left: -3rem;
         }
    
+        .graph{
+          margin-left: 3rem;
+          margin-top: 3rem;
+          
+          /* background-color: rgb(26, 24, 24); */
+        }
+
+        .common{
+          margin-top: 5rem;
+          height: 2rem;
+          /* width: 90%; */
+          background-color: #E0935B;
+        }
+        .first{
+          width: {{frequency[0]}};
+        }
+        .second{
+          width: {{frequency[1]}};
+        }
+        .third{
+          /* width: 70%;
+           */
+           width: {{frequency[2]}};
+        }
+        .fourth{
+          /* width: 60%; */
+          width: {{frequency[3]}}
+        }
+        .fifth{
+          width: {{frequency[4]}};
+          /* width: 50%; */
+        }
+        .graph-text{
+          font-weight: bold;
+          margin-left: 1rem;
+          color: #252528;
+        }
         </style>
     <br><br>
     <h1 style="margin-left: 3rem;">Performance Analysis</h1>
@@ -84,7 +122,17 @@ align-self: center;
       <div class="barchart">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 
-<canvas id="horizontalBarChartCanvas"></canvas>
+<div class="graph">
+<div class="first common">
+  <p class="graph-text">{{names[0]}}</p>
+</div>
+<div class="second common">
+  <p class="graph-text">{{names[1]}}</p>
+</div>
+<div class="third common"><p class="graph-text">{{names[2]}}</p></div>
+<div class="fourth common"><p class="graph-text">{{names[3]}}</p></div>
+<div class="fifth common"><p class="graph-text">{{names[4]}}</p></div>
+</div>
       </div>
       <br><br>
       <center><div class="flex-container2">
@@ -98,5 +146,6 @@ align-self: center;
             <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">96</p></div>
             </div>
       </div></center>
+      <br><br><br>
 </body>
 </html>

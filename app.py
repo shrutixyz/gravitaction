@@ -50,7 +50,15 @@ def analyse():
 
 @app.route('/analyse_results')
 def analyse_results():
-    return render_template('analyse/analyse_results.html')
+    freq = [('singing', 15), ('eloquent', 7), ("party", 5), ("samosa", 4), ("jalebi", 2)]
+    first = str(freq[0][1]*90/freq[0][1])+ "%"
+    second = str(freq[1][1]*90/freq[0][1])+ "%"
+    third = str(freq[2][1]*90/freq[0][1])+ "%"
+    fourth = str(freq[3][1]*90/freq[0][1])+ "%"
+    fifth = str(freq[4][1]*90/freq[0][1]) + "%"
+    frequency = [first, second, third, fourth, fifth]
+    names = [str(freq[0][0]), str(freq[1][0]), str(freq[2][0]), str(freq[3][0]), str(freq[4][0])]
+    return render_template('analyse/analyse_results.html', names = names, frequency = frequency)
 
 @app.route('/enhance_results')
 def enhance_results():
