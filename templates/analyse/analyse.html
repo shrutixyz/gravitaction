@@ -10,8 +10,18 @@
 </head>
 <body>
     <div class="container">
+        <div class="clock-wrapper">
+            <div class="clock">
+                <span id="minutes">00</span>:<span id="seconds">00</span>
+            </div>
+            <p>Time</p>
+        </div>
+        
+        <br><br>
         <div class="wrapper">
+            
             <div class="left">
+                
                 <div class="video">
                     <video id="videostream" muted="muted"></video>
                     <audio id="audiostream"></audio>
@@ -32,6 +42,11 @@
                             <img src="../../static/stop.svg" alt="stop-btn" id="stop-btn"/>
                             <p>Stop</p>
                         </div>
+                        <!-- <div class="stop">
+
+                            <img src="../../static/submit.svg" alt="stop-btn" id="submit-btn"/>
+                            <p>Submit</p>
+                        </div> -->
                     </div>
                     <div class="time">
                         <p>00:00</p>
@@ -42,8 +57,10 @@
                 <div class="subtitle">
 
                 </div>
-                <form action="{{ url_for('index') }}" method="post">
-                    <input type="text" id="transcript-result">
+                <form action="{{ url_for('analyse') }}" method="POST">
+                    <input type="text" name="ans" id="transcript-result">
+                    <input type="text" name="time" id="clock-result">
+                    <button type="submit" id="submit-btn">See Results</button>
                 </form>
             </div>
         </div>

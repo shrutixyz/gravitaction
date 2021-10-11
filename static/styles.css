@@ -163,6 +163,29 @@ hr {
     overflow-y: scroll;
 }
 
+#transcript-result {
+    visibility: hidden;
+}
+
+.clock-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    
+}
+
+.clock {
+    background-color: var(--clr-grey-1);
+    padding: 1.2rem 1.85rem;
+    border-radius: 20px;
+    max-width: fit-content;
+    
+}
+
+#minutes, #seconds {
+    font-size: large;
+    color:  var(--clr-grey-4);
+}
 
 
 

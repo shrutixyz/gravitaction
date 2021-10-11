@@ -36,9 +36,16 @@ def test():
 def enhance():
     return render_template('enhance/enhance.html', message=message, percent = str(percent) + "%")
 
-@app.route('/analyse')
+@app.route('/analyse', methods = ['GET', 'POST'])
 def analyse():
-    return render_template('analyse/analyse.html')
+    form = ""
+    if request.method == 'POST':
+        form = request.form
+        transcriptResult = request.form.getlist('ans')
+        clockResult = request.form.getlist('time')
+        print(transcriptResult, clockResult ,"here")
+        print(form, "made a req")
+    return render_template('analyse/analyse.html', form = form)
 
 
 @app.route('/analyse_results')

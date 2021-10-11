@@ -12,15 +12,15 @@
         var moveCount = 0;
         var before = 0;
         async function setupCamera(videoElement) {
-  const constraints = {video: {width: 320,height: 240}, audio: false};
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  videoElement.srcObject = stream;
-  return new Promise(resolve => {
-    videoElement.onloadedmetadata = () => {
-      videoElement.play();
-      resolve();
-    };
-  });
+          const constraints = {video: {width: 320,height: 240}, audio: false};
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          videoElement.srcObject = stream;
+          return new Promise(resolve => {
+            videoElement.onloadedmetadata = () => {
+              videoElement.play();
+              resolve();
+            };
+          });
 }
 
 function startRender(input, output, model) {
