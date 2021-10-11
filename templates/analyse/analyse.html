@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontawesome/fontawesome-free@5.6.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -24,9 +27,11 @@
                 
                 <div class="video">
                     <video id="videostream" muted="muted"></video>
+                    
                     <audio id="audiostream"></audio>
                     <!-- <h3>Press Record to start practising</h3> -->
                 </div>
+                <canvas id="output"></canvas>
                 <div class="utility">
                     <div class="line">
                         <hr>

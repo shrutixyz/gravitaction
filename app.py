@@ -66,6 +66,8 @@ def downloadFile ():
 def progress():
     return render_template('enhance/progress.html')
 
+
+
 @app.route("/extract_frames", methods=['POST'])
 def extract_frames():
     video = request.files['file1']

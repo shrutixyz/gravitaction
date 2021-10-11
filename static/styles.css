@@ -163,7 +163,7 @@ hr {
     overflow-y: scroll;
 }
 
-#transcript-result {
+#transcript-result, #clock-result {
     visibility: hidden;
 }
 
@@ -187,7 +187,15 @@ hr {
     color:  var(--clr-grey-4);
 }
 
+#output {
+    display: none;
+}
 
+#submit-btn {
+    color: var(--clr-grey-1);
+    background-color: var(--clr-primary-3);
+    border: none;
+}
 
 
 

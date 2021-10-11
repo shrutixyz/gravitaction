@@ -1,4 +1,5 @@
 const video = document.querySelector('#videostream');
+const output = document.querySelector('#output');
 const audio = document.querySelector('#audiostream');
 const recordBtn = document.querySelector('#record-btn');
 const stopBtn = document.querySelector('#stop-btn');
@@ -13,6 +14,9 @@ const resultClock = document.querySelector('#clock-result');
 
 //initialise time
 var timerVar;
+var count = 0;
+var moveCount = 0;
+var before = 0;
 
 //initialise speech recog
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -27,6 +31,47 @@ let p = document.createElement('p');
 let r;
 transcriptInput.appendChild(p);
 
+function startRender(input, output, model) {
+    const ctx = output.getContext("2d");
+    async function renderFrame() {
+      requestAnimationFrame(renderFrame);
+      const faces = await model.estimateFaces(input, false, false);
+      ctx.clearRect(0, 0, output.width, output.height);
+      faces.forEach(face => {
+        face.scaledMesh.forEach(xy => {
+            count++;
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], 1, 0, 2 * Math.PI);
+          ctx.fill();
+          if(Math.abs(xy[0]-before)>10){
+              moveCount++;
+          }
+          before = xy[0]
+          console.log(xy[0])
+        });
+      });
+    }
+    renderFrame();
+  }
+
+
+function showResults(){
+    console.log("move"+moveCount);
+    console.log("count" + count);
+    var raw = moveCount*165/count;
+    console.log("raw: "+raw);
+    var final = 30;
+    if(moveCount*165/count >90){
+        final = (90-moveCount/count); 
+    }
+    else{
+        final  = raw + 5;
+    }
+    if(final<30){
+        final = 35;
+    }
+    window.alert("your score is" + final + "%");
+}
 
 recognition.addEventListener('result', e => {
     p.textContent = "\n"
@@ -58,7 +103,7 @@ recognition.addEventListener('end', () => {
 
    
 
-recordBtn.addEventListener('click', e => {
+recordBtn.addEventListener('click', async (e) => {
     console.log('record btn clicked')
     
    
@@ -80,8 +125,12 @@ recordBtn.addEventListener('click', e => {
         alert('You have to give browser the permission to run Webcam and mic ;( ');
     });
 
-    //start timer
+    //start facemesh
+    const model = await facemesh.load({maxFaces : 1})
+    startRender(video, output, model)
 
+
+    //start timer
     timerVar = setInterval(countTimer, 1000);
     var totalSeconds = 0;
     function countTimer() {
@@ -122,6 +171,8 @@ stopBtn.addEventListener('click', e => {
 
 
 submitBtn.addEventListener('click', e => {
+    e.preventDefault()
+    showResults()
     resultTranscript.value = transcriptInput.textContent;
 
   
