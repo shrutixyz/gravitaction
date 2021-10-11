@@ -120,10 +120,7 @@ hr {
     overflow: hidden;
 }
 
-#videostream {
-    height: 100%;
-    object-fit: fill;
-}
+
 
 .right {
     background-color: var(--clr-grey-1);
