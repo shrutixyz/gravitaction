@@ -43,7 +43,7 @@ function startRender(input, output, model) {
           ctx.beginPath();
           ctx.arc(xy[0], xy[1], 1, 0, 2 * Math.PI);
           ctx.fill();
-          if(Math.abs(xy[0]-before)>10){
+          if(Math.abs(xy[0]-before)>30){
               moveCount++;
           }
           before = xy[0]
@@ -59,6 +59,7 @@ function showResults(){
     console.log("move"+moveCount);
     console.log("count" + count);
     var raw = moveCount*165/count;
+    moveCount = 3*moveCount/5
     console.log("raw: "+raw);
     var final = 30;
     if(moveCount*165/count >90){
