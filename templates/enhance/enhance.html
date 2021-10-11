@@ -71,24 +71,24 @@ rgba(53, 53, 55, 1);
             $("#content").hide();       
         }
         var prog = "0"
-        var intervalId = window.setInterval(function(){
+//         var intervalId = window.setInterval(function(){
          
-          var msg = "enhancing your awesome video - " + prog + "% done"
+//           var msg = "enhancing your awesome video - " + prog + "% done"
           
-fetch('../static/progress.txt')
-  .then(response => response.text())
-  .then(text => prog = text);
+// fetch('../static/progress.txt')
+//   .then(response => response.text())
+//   .then(text => prog = text);
 
-            document.getElementById('loading-text').innerHTML = msg;
-}, 500);
-        window.onload = function(){
+//             document.getElementById('loading-text').innerHTML = msg;
+// }, 500);
+//         window.onload = function(){
             
     
-};
+// };
 
 // ]]></script>
   <center> 
-    <div id="loading"><p id="loading-text" style="color: white; font-size: large;">enhancing your awesome video</p>
+    <div id="loading"><p id="loading-text" style="color: white; font-size: large;">enhancing your awesome video...</p>
         <div class="progress">
             <span class="progress-bar" ></span>
           </div>

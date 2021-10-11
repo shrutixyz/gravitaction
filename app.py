@@ -63,9 +63,6 @@ def downloadFile ():
     path = "final_vid.mp4"
     return send_file(path, as_attachment=True)
 
-@app.route('/progress')
-def progress():
-    return send_file("progress.txt")
 
 @app.route("/extract_frames", methods=['POST'])
 def extract_frames():
@@ -73,20 +70,14 @@ def extract_frames():
     video.save('video/video.mp4')
     print("vid saved")
     global percent
-    file_prog = open("progress.txt","w")
     percent = 10
-    file_prog.write(str(percent))
-    file_prog.close()
     my_clip = mp.VideoFileClip(r"video/video.mp4")
     my_clip.audio.write_audiofile(r"audio/audio.mp3")
     print("audio extracted")
     percent = 30
-    file_prog = open("progress.txt","w")
-    file_prog.write(str(percent))
-    file_prog.close()
     print("started")
     cap= cv2.VideoCapture('video/video.mp4') # add file path here dynamically
-    cap.set(cv2.CAP_PROP_FPS, 60) # this isnt working rn idk why, taking 30fps only
+    # cap.set(cv2.CAP_PROP_FPS, 60) # this isnt working rn idk why, taking 30fps only
     i=0
 
     while(cap.isOpened()):
@@ -114,9 +105,6 @@ def extract_frames():
     print(i)
     print("made frames")
     percent = 70
-    file_prog = open("progress.txt","w")
-    file_prog.write(str(percent))
-    file_prog.close()
     # os.system("ffmpeg -r 30 -i frames/enhanced/img%01d.png -vcodec mpeg4 -y final_vid.mp4")
     print("Joining the frames started")
     img_array = []
@@ -131,9 +119,6 @@ def extract_frames():
     out = cv2.VideoWriter('final_vid.avi',cv2.VideoWriter_fourcc(*'DIVX'), 30, size)
     print("Video released")
     percent = 80
-    file_prog = open("progress.txt","w")
-    file_prog.write(str(percent))
-    file_prog.close()
     for i in range(len(img_array)):
         out.write(img_array[i])
     out.release()
@@ -144,9 +129,6 @@ def extract_frames():
     print("finalizing audio")
     videoclip = clip.set_audio(audioclip)
     percent = 90
-    file_prog = open("progress.txt","w")
-    file_prog.write(str(percent))
-    file_prog.close()
     videoclip.write_videofile("final_vid.mp4", fps=30, threads=1, codec="libx264")
     print("FINAL VIDEO PROCESSING DONE")
     video_size = os.stat('final_vid.mp4').st_size
@@ -157,9 +139,6 @@ def extract_frames():
     cv2.imwrite("static/5.png", img_before)
     # print("saving 5th frame cont")
     percent = 100
-    file_prog = open("progress.txt","w")
-    file_prog.write(str(percent))
-    file_prog.close()
     cv2.imwrite("static/5enh.png", img_after)
     # img_after.save("")
     files = glob.glob('frames/*.png')
