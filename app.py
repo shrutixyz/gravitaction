@@ -76,7 +76,7 @@ def get_results():
     # fifth = str(freq[4][1]*90/freq[0][1]) + "%"
     # frequency = [first, second, third, fourth, fifth]
     # names = [str(freq[0][0]), str(freq[1][0]), str(freq[2][0]), str(freq[3][0]), str(freq[4][0])]
-    return render_template('analyse/analyse_results.html', confidence = confidenceResult, paceResult = paceResult, grammarList = grammarResult, grammarLen = len(grammarResult), fillerLen = fillerLen, vocab = vocab,bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'])
+    return render_template('analyse/analyse_results.html', confidence = str(round(float(confidenceResult), 2)), paceResult = str(round(float(paceResult), 2)), grammarList =grammarResult, grammarLen =len(grammarResult), fillerLen = fillerLen, vocab =str(round(float(vocab), 2)),bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'], score = round(((float(vocab)*20)+float(confidenceResult))/2, 2))
 
 
 
