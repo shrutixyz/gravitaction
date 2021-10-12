@@ -64,19 +64,7 @@ def get_results():
 
     frequent = most_frequently_words(transcriptResult)
     print(frequent)
-
-    # print(transcriptResult, clockResult, confidenceResult ,"here")
-    # print(form, "made a req") 
-
-    # freq = [('singing', 15), ('eloquent', 7), ("party", 5), ("samosa", 4), ("jalebi", 2)]
-    # first = str(freq[0][1]*90/freq[0][1])+ "%"
-    # second = str(freq[1][1]*90/freq[0][1])+ "%"
-    # third = str(freq[2][1]*90/freq[0][1])+ "%"
-    # fourth = str(freq[3][1]*90/freq[0][1])+ "%"
-    # fifth = str(freq[4][1]*90/freq[0][1]) + "%"
-    # frequency = [first, second, third, fourth, fifth]
-    # names = [str(freq[0][0]), str(freq[1][0]), str(freq[2][0]), str(freq[3][0]), str(freq[4][0])]
-    return render_template('analyse/analyse_results.html', confidence = confidenceResult, paceResult = paceResult, grammarList = grammarResult, grammarLen = len(grammarResult), fillerLen = fillerLen, vocab = vocab,bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'])
+    return render_template('analyse/analyse_results.html', confidence = str(round(float(confidenceResult), 2)), paceResult = str(round(float(paceResult), 2)), grammarList =grammarResult, grammarLen =len(grammarResult), fillerLen = fillerLen, vocab =str(round(float(vocab), 2)),bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'], score = round(((float(vocab)*20)+float(confidenceResult))/2, 2))
 
 
 
@@ -200,32 +188,3 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-
-
-# import cv2
-# import numpy as np
-# from PIL import Image 
-# from PIL import ImageEnhance
-
-# img_isr = cv2.imread('test2.png')
-# print("Frame opened for scaling")
-# img = Image.open('test2.png')
-# # median = cv2.GaussianBlur(img_isr,-1, (9,9),cv2.BORDER_DEFAULT)
-# # filterbaamzi = cv2.filter2D(src=image, ddepth=-1, (3,3))
-# # box = cv2.boxFilter(img_isr, -1, (10, 10), normalize=True)
-# bright = ImageEnhance.Brightness(img)
-# image_brightened = bright.enhance(1.5)
-# color = ImageEnhance.Color(img)
-# image_colored = color.enhance(1.5)
-# contrast = ImageEnhance.Contrast(img)
-# image_contrasted = contrast.enhance(1.5)
-# sharp = ImageEnhance.Sharpness(img)
-# image_sharped = sharp.enhance(1.5)
-# box = cv2.bilateralFilter(img_isr, 5, 10, 10) 
-# image_brightened.save('bright.png')
-# image_colored.save("colored.png")
-# image_contrasted.save("constrast.png")
-# image_sharped.save("sharp.png")
-# print("Filter applied")
-# # Image.fromarray(median).save('gaussian.png')
-# Image.fromarray(box).save('box.png')

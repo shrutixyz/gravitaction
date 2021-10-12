@@ -121,7 +121,7 @@ def get_common_words(text):
     # multuply by 100 to get percentage and since 10% == 0.9, multiply the result by 0.09 ===> multiply by 100 * 0.09
     initial_index = (numerator / denominator) * 9
 
-    print(initial_index, 'beef')
+    print(initial_index, 'love')
     if initial_index < 0.2:
         initial_index = 0.2
     elif initial_index > 0.9:
