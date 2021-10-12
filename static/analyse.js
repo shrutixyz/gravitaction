@@ -173,7 +173,7 @@ stopBtn.addEventListener('click', e => {
 
 
 submitBtn.addEventListener('click', e => {
-    e.preventDefault()
+
     const confidence = showResults()
     resultTranscript.value = transcriptInput.textContent;
 
@@ -187,6 +187,6 @@ submitBtn.addEventListener('click', e => {
     resultConfidence.value = confidence;
 
 
-    console.log(resultConfidence.value)
+    // console.log(resultConfidence.value)
 })
 

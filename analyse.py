@@ -53,14 +53,13 @@ def pace(text, time):
     words = split_words(text)
     total_words = len(words)
 
-    limit = (total_words // time) * 60
+    limit = (total_words / time) * 60
 
     return limit
 
 
 def tone(text):
     pass
-
 
 def preprocess(text):
     #set stop words
@@ -111,7 +110,7 @@ def get_common_words(text):
                 vocab.append(word)
     
     numerator = len(vocab)
-   
+    print(vocab)
     temp = split_words(text)
     
     
@@ -174,6 +173,9 @@ def most_frequently_words(text):
 
     ans = sorted(a.items(), key=lambda item: item[1])
     ans = ans[::-1]
+
+    if len(ans) > 5:
+        ans = ans[:5]
     
     return ans
     

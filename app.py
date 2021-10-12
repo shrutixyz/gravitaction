@@ -9,6 +9,7 @@ import os
 import glob
 from moviepy.editor import *
 from PIL import ImageEnhance
+from analyse import *
 
 percent = 10
 UPLOAD_FOLDER = 'uploadFile'
@@ -32,11 +33,10 @@ def test():
     return render_template('test2.html')
 
 @app.route('/enhance')
-
 def enhance():
     return render_template('enhance/enhance.html', message=message, percent = str(percent) + "%")
 
-@app.route('/analyse', methods = ['GET', 'POST'])
+@app.route('/analyse')
 def analyse():
     form = ""
     if request.method == 'POST':
@@ -47,18 +47,45 @@ def analyse():
         print(form, "made a req")
     return render_template('analyse/analyse.html', form = form)
 
+@app.route('/get_results', methods = ['POST'])
+def get_results():
+    form = request.form
+    transcriptResult = request.form.getlist('ans')[0]
+    clockResult = int(request.form.getlist('time')[0])
+    confidenceResult = request.form.getlist('confidence')[0]
+
+    paceResult = pace(transcriptResult, clockResult)
+    grammarResult = grammar_check(transcriptResult)
+    vocab = get_common_words(transcriptResult)
+    fillerList = get_filler(transcriptResult)
+    bannedLen= banned_words(transcriptResult)
+    fillerLen = len(fillerList)
+    
+
+    frequent = most_frequently_words(transcriptResult)
+    print(frequent)
+
+    # print(transcriptResult, clockResult, confidenceResult ,"here")
+    # print(form, "made a req") 
+
+    # freq = [('singing', 15), ('eloquent', 7), ("party", 5), ("samosa", 4), ("jalebi", 2)]
+    # first = str(freq[0][1]*90/freq[0][1])+ "%"
+    # second = str(freq[1][1]*90/freq[0][1])+ "%"
+    # third = str(freq[2][1]*90/freq[0][1])+ "%"
+    # fourth = str(freq[3][1]*90/freq[0][1])+ "%"
+    # fifth = str(freq[4][1]*90/freq[0][1]) + "%"
+    # frequency = [first, second, third, fourth, fifth]
+    # names = [str(freq[0][0]), str(freq[1][0]), str(freq[2][0]), str(freq[3][0]), str(freq[4][0])]
+    return render_template('analyse/analyse_results.html', confidence = confidenceResult, paceResult = paceResult, grammarList = grammarResult, grammarLen = len(grammarResult), fillerLen = fillerLen, vocab = vocab,bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'])
+
+
+
+
 
 @app.route('/analyse_results')
 def analyse_results():
-    freq = [('singing', 15), ('eloquent', 7), ("party", 5), ("samosa", 4), ("jalebi", 2)]
-    first = str(freq[0][1]*90/freq[0][1])+ "%"
-    second = str(freq[1][1]*90/freq[0][1])+ "%"
-    third = str(freq[2][1]*90/freq[0][1])+ "%"
-    fourth = str(freq[3][1]*90/freq[0][1])+ "%"
-    fifth = str(freq[4][1]*90/freq[0][1]) + "%"
-    frequency = [first, second, third, fourth, fifth]
-    names = [str(freq[0][0]), str(freq[1][0]), str(freq[2][0]), str(freq[3][0]), str(freq[4][0])]
-    return render_template('analyse/analyse_results.html', names = names, frequency = frequency)
+    
+    return render_template('analyse/analyse_results.html')
 
 @app.route('/enhance_results')
 def enhance_results():

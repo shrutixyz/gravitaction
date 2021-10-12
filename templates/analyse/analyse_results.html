@@ -15,17 +15,17 @@
     <style>
         .flex-container {
             width: 100%;
-align-items: center;
-align-self: center;
+            align-items: center;
+            align-self: center;
             justify-content: space-around;
-          display: flex;
+            display: flex;
           /* flex-wrap: nowrap; */
          /* background-color: pink; */
         }
         
         .flex-container > div {
-            background-image: linear-gradient(to bottom right, #28597E, rgb(17, 16, 16),rgb(15, 15, 15), black);
-        border-radius: 1rem;
+          background-image: linear-gradient(to bottom right, #28597E, rgb(17, 16, 16),rgb(15, 15, 15), black);
+          border-radius: 1rem;
           background-color: #f1f1f1;
          
           width: 80%;
@@ -37,10 +37,10 @@ align-self: center;
         }
         .flex-container2 {
             width: 100%;
-align-items: center;
-align-self: center;
+            align-items: center;
+            align-self: center;
             justify-content: space-around;
-          display: flex;
+            display: flex;
           /* flex-wrap: nowrap; */
          /* background-color: pink; */
         }
@@ -85,25 +85,8 @@ align-self: center;
           /* width: 90%; */
           background-color: #E0935B;
         }
-        .first{
-          width: {{frequency[0]}};
-        }
-        .second{
-          width: {{frequency[1]}};
-        }
-        .third{
-          /* width: 70%;
-           */
-           width: {{frequency[2]}};
-        }
-        .fourth{
-          /* width: 60%; */
-          width: {{frequency[3]}}
-        }
-        .fifth{
-          width: {{frequency[4]}};
-          /* width: 50%; */
-        }
+        
+        
         .graph-text{
           font-weight: bold;
           margin-left: 1rem;
@@ -114,8 +97,9 @@ align-self: center;
     <h1 style="margin-left: 3rem;">Performance Analysis</h1>
     <h1 style="float: right; margin-right: 3rem; margin-top: -3rem;">Score: <span style="color: white;">70/100</span></h1>
     <center><div class="flex-container">
-        <div><p class="ptop" >Pace</p> <br><p class="pbottom">120 words/min</p></div>
-        <div><p class="ptop">Confidence</p> <br><p class="pbottom" style="margin-left: -6.7rem;">Medium</p></div><div><p class="ptop">Fluency</p> <br><p class="pbottom" style="margin-left: -5rem;">Proficient</p></div>
+        <div><p class="ptop" >Pace</p> <br><p class="pbottom">{{paceResult}} words/min</p></div>
+        <div><p class="ptop">Confidence</p> <br><p class="pbottom" style="margin-left: -6.7rem;">{{ confidence }}</p></div>
+        <div><p class="ptop">Grammatical Errors</p> <br><p class="pbottom" style="margin-left: -5rem;">{{ grammarLen }}</p></div>
       </div></center>
       <br><br>
       <h1 style="margin-left: 3rem; font-size: smaller;">Most frequently used words</h1>
@@ -123,29 +107,64 @@ align-self: center;
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 
 <div class="graph">
-<div class="first common">
+<!-- <div class="first common">
   <p class="graph-text">{{names[0]}}</p>
-</div>
+</div> -->
 <div class="second common">
-  <p class="graph-text">{{names[1]}}</p>
+  <!-- <p class="graph-text">{{names[1]}}</p> -->
 </div>
-<div class="third common"><p class="graph-text">{{names[2]}}</p></div>
-<div class="fourth common"><p class="graph-text">{{names[3]}}</p></div>
-<div class="fifth common"><p class="graph-text">{{names[4]}}</p></div>
+<!-- <div class="third common"><p class="graph-text">{{names[2]}}</p></div> -->
+<!-- <div class="fourth common"><p class="graph-text">{{names[3]}}</p></div> -->
+<!-- <div class="fifth common"><p class="graph-text">{{names[4]}}</p></div> -->
 </div>
       </div>
       <br><br>
-      <center><div class="flex-container2">
-        <div><p class="ptop">Vocabulary Index</p><br>
-        <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">0.8</p></div>
-        </div>
-        <div><p class="ptop">Filler Word Count</p><br>
-          <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">69</p></div>
-          </div>
-          <div><p class="ptop">Banned Words Count</p><br>
-            <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">96</p></div>
+      <center>
+        <div class="flex-container2">
+          <div>
+            <p class="ptop">Vocabulary Index</p><br>
+            <div class="inside">
+              <p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{vocab}}</p>
             </div>
-      </div></center>
+          </div>
+          <div>
+            <p class="ptop">Filler Word Count</p><br>
+            <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{fillerLen}}</p></div>
+          </div>
+          <div>
+            <p class="ptop" style="width: 90%;">Banned Words Count</p><br>
+            <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{ bannedLen }}</p></div>
+            </div>
+          </div>
+       </center>
       <br><br><br>
 </body>
+<script>
+  const graphDiv = document.querySelector('.graph')
+  const ref = ['first', 'second', 'third', 'fourth', 'fifth']
+  var f = {{ frequent | tojson }}
+  let w;
+  let maxf = f[0][1]
+  let innerGraph = ""
+  f.map((element, index) => {
+    w = element[1] * 90 / maxf
+    innerGraph += `
+    <div class="${ref[index]} common" style="width: ${w}%;">
+      <p class="graph-text">${element[0]}</p>
+    </div>
+    
+    
+    `
+  })
+
+  graphDiv.innerHTML = innerGraph;
+
+
+
+
+
+</script>
+
+
+
 </html>

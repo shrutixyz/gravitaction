@@ -160,7 +160,7 @@ hr {
     overflow-y: scroll;
 }
 
-#transcript-result, #clock-result {
+#transcript-result, #clock-result, #confidence-result {
     visibility: hidden;
 }
 
