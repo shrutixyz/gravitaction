@@ -114,9 +114,10 @@ def get_common_words(text):
     temp = split_words(text)
     
     
-    
-    denominator = len(temp)
-
+    if len(temp) > 0:
+        denominator = len(temp)
+    else:
+        denominator = 1
     # multuply by 100 to get percentage and since 10% == 0.9, multiply the result by 0.09 ===> multiply by 100 * 0.09
     initial_index = (numerator / denominator) * 9
 
@@ -153,12 +154,12 @@ def get_filler(text):
 def most_frequently_words(text):
 
     #preprocess
-    words = split_words(text)
+    words = preprocess(text)
 
-    stop_words = set(stopwords.words('english'))
+    # stop_words = set(stopwords.words('english'))
 
     
-    words = [w.lower() for w in words if not w in stop_words] 
+    # words = [w.lower() for w in words if not w in stop_words] 
     
     for word in words:
         if bool(re.search(r'\d', word)):

@@ -99,7 +99,7 @@ recognition.addEventListener('end', () => {
     if(video.classList.contains('play')){
         console.log('restart')
         recognition.start()
-        transcriptInput.innerText += "..."
+        transcriptInput.innerText += " ... "
     }
 });
 
