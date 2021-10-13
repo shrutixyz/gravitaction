@@ -136,7 +136,7 @@ def extract_frames():
         print("The frame number is" + str(i))
         i+=1
     cap.release()
-    cv2.destroyAllWindows()
+#     cv2.destroyAllWindows()
     print(i)
     print("made frames")
     percent = 70
