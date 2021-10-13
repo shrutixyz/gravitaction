@@ -60,7 +60,6 @@ function showResults(){
     console.log("move"+moveCount);
     console.log("count" + count);
     var raw = moveCount*165/count;
-    // moveCount = 3*moveCount/5
     console.log("raw: "+raw);
     var final = 30;
     if(moveCount*165/count >90){
@@ -149,7 +148,6 @@ recordBtn.addEventListener('click', async (e) => {
 
             minutesDiv.innerText = minute;
             secondsDiv.innerText = seconds;
-            //    document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
     }
 
 
@@ -187,6 +185,5 @@ submitBtn.addEventListener('click', e => {
     resultConfidence.value = confidence;
 
 
-    // console.log(resultConfidence.value)
 })
 

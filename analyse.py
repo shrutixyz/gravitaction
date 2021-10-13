@@ -1,7 +1,4 @@
-text = "following the suggestions from his f***ing mother on 11th April 2010 styles auditioned as a solo contestant ...... so basically for the 7 series of the British revised singing competition called as factor singing a retention of Stevie wonder's isn't she lovely ..."
-
-# text = "Graphology inference of character from a person's handwriting The theory underlying graphology is that handwriting is an expression of personality hence a systematic analysis of the way words and letters are formed can reveal traits of personality"
-
+text = "This is an example test f**"
 import language_tool_python 
 import re
 
@@ -43,14 +40,11 @@ def grammar_check(text):
             grammar.append(temp)
         else:
             print(i.ruleIssueType, "nada", i.message, i.replacements)
-        # print(i.ruleId, i.ruleIssueType)
-        # print("\n")
     print(grammar)
     return grammar
 
 
 def pace(text, time):
-    # text = text.replace(".", "")
     words = split_words(text)
     total_words = len(words)
 
@@ -102,7 +96,6 @@ def get_common_words(text):
         lines.append(l[:-1])
             
     words = preprocess(text)
-    # blacklist = []
     for word in words:
         if word not in lines and not bool(re.search(r'\d', word)) and bool(re.match('^[a-zA-Z0-9]*$',word)):
             
@@ -110,7 +103,7 @@ def get_common_words(text):
                 vocab.append(word)
     
     numerator = len(vocab)
-    print(vocab, "ye rahi aampki vocab")
+    print(vocab, "your vocab here")
     temp = split_words(text)
     
     
@@ -118,10 +111,9 @@ def get_common_words(text):
         denominator = len(temp)
     else:
         denominator = 1
-    # multuply by 100 to get percentage and since 10% == 0.9, multiply the result by 0.09 ===> multiply by 100 * 0.09
+    # multiply by 100 to get percentage and since 10% == 0.9, multiply the result by 0.09 ===> multiply by 100 * 0.09
     initial_index = (numerator / denominator) * 9
 
-    # print(initial_index, 'love')
     if initial_index < 0.2:
         initial_index = 0.2
     elif initial_index > 0.9:
@@ -155,11 +147,6 @@ def most_frequently_words(text):
 
     #preprocess
     words = preprocess(text)
-
-    # stop_words = set(stopwords.words('english'))
-
-    
-    # words = [w.lower() for w in words if not w in stop_words] 
     
     for word in words:
         if bool(re.search(r'\d', word)):
@@ -177,7 +164,7 @@ def most_frequently_words(text):
 
     if len(ans) > 5:
         ans = ans[:5]
-    print(ans, "aur ye rahi freq")
+    print(ans, "your frequency")
     return ans
     
 
@@ -199,8 +186,5 @@ def banned_words(text):
         if "*" in word:
             count += 1
     return count 
-
-# print(most_frequently_words(text))
-# print(getsynonyms("apprehensive"))
 
     
