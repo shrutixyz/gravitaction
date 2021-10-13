@@ -2,7 +2,7 @@ text = "following the suggestions from his f***ing mother on 11th April 2010 sty
 
 # text = "Graphology inference of character from a person's handwriting The theory underlying graphology is that handwriting is an expression of personality hence a systematic analysis of the way words and letters are formed can reveal traits of personality"
 
-import language_tool_python 
+# import language_tool_python 
 import re
 
 import nltk
@@ -14,7 +14,7 @@ from collections import Counter
 from nltk.stem import PorterStemmer
 from nltk.util import pr
 
-tool = language_tool_python.LanguageTool('en-US')
+# tool = language_tool_python.LanguageTool('en-US')
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -24,29 +24,29 @@ nltk.download('wordnet')
 from nltk.corpus import wordnet
 
 
-def grammar_check(text):
-    t = text.replace(".", "")
-    # print(t)
-    matches = tool.check(t)
-    grammar = []
-    print(len(matches))
-    for i in matches:
+# def grammar_check(text):
+#     t = text.replace(".", "")
+#     # print(t)
+#     matches = tool.check(t)
+#     grammar = []
+#     print(len(matches))
+#     for i in matches:
         
-        if not (i.ruleIssueType == "whitespace" or i.ruleIssueType == "typographical" or i.ruleIssueType == "misspelling"):
-            print(i.ruleIssueType,i.message , i.replacements,i.context,"tada")
-            temp = {
-             'ruleIssueType' : i.ruleIssueType,
-             'message' : i.message,
-             'context' : i.context
-            }
+#         if not (i.ruleIssueType == "whitespace" or i.ruleIssueType == "typographical" or i.ruleIssueType == "misspelling"):
+#             print(i.ruleIssueType,i.message , i.replacements,i.context,"tada")
+#             temp = {
+#              'ruleIssueType' : i.ruleIssueType,
+#              'message' : i.message,
+#              'context' : i.context
+#             }
            
-            grammar.append(temp)
-        else:
-            print(i.ruleIssueType, "nada", i.message, i.replacements)
-        # print(i.ruleId, i.ruleIssueType)
-        # print("\n")
-    print(grammar)
-    return grammar
+#             grammar.append(temp)
+#         else:
+#             print(i.ruleIssueType, "nada", i.message, i.replacements)
+#         # print(i.ruleId, i.ruleIssueType)
+#         # print("\n")
+#     print(grammar)
+#     return grammar
 
 
 def pace(text, time):

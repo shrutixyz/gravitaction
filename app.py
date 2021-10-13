@@ -56,12 +56,12 @@ def get_results():
 
     
     paceResult = pace(transcriptResult, clockResult)
-    grammarResult = grammar_check(transcriptResult)
+    # grammarResult = grammar_check(transcriptResult)
     vocab = get_common_words(transcriptResult)
     fillerList = get_filler(transcriptResult)
     bannedLen= banned_words(transcriptResult)
     fillerLen = len(fillerList)
-    
+    grammarResult = []
 
     frequent = most_frequently_words(transcriptResult)
     synonyms = []
