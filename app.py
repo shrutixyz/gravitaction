@@ -47,7 +47,7 @@ def analyse():
         print(form, "made a req")
     return render_template('analyse/analyse.html', form = form)
 
-@app.route('/get_results', methods = ['GET','POST'])
+@app.route('/get_results', methods = ['POST'])
 def get_results():
     form = request.form
     transcriptResult = request.form.getlist('ans')[0]
