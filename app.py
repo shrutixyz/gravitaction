@@ -47,7 +47,7 @@ def analyse():
         print(form, "made a req")
     return render_template('analyse/analyse.html', form = form)
 
-@app.route('/get_results', methods = ['POST'])
+@app.route('/get_results', methods = ['GET','POST'])
 def get_results():
     form = request.form
     transcriptResult = request.form.getlist('ans')[0]
@@ -73,15 +73,22 @@ def get_results():
         print(synonym, w)
     print(frequent, "fr")
 
-    # paceResult = 0
-    # confidenceResult = 40
+    # paceResult = 138.89
+    # confidenceResult = 59.62
     # grammarResult = []
-    # vocab = 0
+    # vocab = 0.2
     # bannedLen = 0
-    # fillerLen = 0
-    # frequent = [('hello',3)]
-    # fillerList = ['like', 'basically']
-    # synonyms = [['dissect', 'analyze', 'analyse', 'break_down', 'examine', 'take_apart', 'study', 'psychoanalyze', 'canvas', 'canvass', 'psychoanalyse']]
+    # fillerLen = 4
+    # synonyms = []
+    # frequent = [('like',3), ('perspective',3),('getting',2), ('way', 2), ('upon', 2)]
+    # for word in frequent:
+    #     w = word[0]
+    #     synonym = getsynonyms(w)
+
+    #     synonyms.append(synonym)
+    #     print(synonym, w)
+    # print(frequent, "fr")
+    # fillerList = ['like','so','okay', 'surely']
 
 
     return render_template('analyse/analyse_results.html', fillerList = fillerList, synonyms = synonyms ,confidence = str(round(float(confidenceResult), 2)), paceResult = str(round(float(paceResult), 2)), grammarList =grammarResult, grammarLen =len(grammarResult), fillerLen = fillerLen, vocab =str(round(float(vocab), 2)),bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'], score = round(((float(vocab)*20)+float(confidenceResult))/2, 2))

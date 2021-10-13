@@ -188,7 +188,7 @@ def getsynonyms(word):
     for syn in wordnet.synsets(word):
         for lm in syn.lemmas():
                 synonyms.append(lm.name())#adding into synonyms
-    return (list(synonyms))
+    return (list(set(synonyms)))
 
 
 def banned_words(text):
