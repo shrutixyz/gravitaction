@@ -54,15 +54,7 @@ def get_results():
     clockResult = int(request.form.getlist('time')[0])
     confidenceResult = request.form.getlist('confidence')[0]
 
-    # paceResult = 0
-    # confidenceResult = 40
-    # grammarResult = []
-    # vocab = 0
-    # bannedLen = 0
-    # fillerLen = 0
-    # frequent = [('hello',3)]
-    # fillerList = ['like', 'basically']
-    # synonyms = [['dissect', 'analyze', 'analyse', 'break_down', 'examine', 'take_apart', 'study', 'psychoanalyze', 'canvas', 'canvass', 'psychoanalyse']]
+    
     paceResult = pace(transcriptResult, clockResult)
     grammarResult = grammar_check(transcriptResult)
     vocab = get_common_words(transcriptResult)
@@ -80,6 +72,18 @@ def get_results():
         synonyms.append(synonym)
         print(synonym, w)
     print(frequent, "fr")
+
+    # paceResult = 0
+    # confidenceResult = 40
+    # grammarResult = []
+    # vocab = 0
+    # bannedLen = 0
+    # fillerLen = 0
+    # frequent = [('hello',3)]
+    # fillerList = ['like', 'basically']
+    # synonyms = [['dissect', 'analyze', 'analyse', 'break_down', 'examine', 'take_apart', 'study', 'psychoanalyze', 'canvas', 'canvass', 'psychoanalyse']]
+
+
     return render_template('analyse/analyse_results.html', fillerList = fillerList, synonyms = synonyms ,confidence = str(round(float(confidenceResult), 2)), paceResult = str(round(float(paceResult), 2)), grammarList =grammarResult, grammarLen =len(grammarResult), fillerLen = fillerLen, vocab =str(round(float(vocab), 2)),bannedLen = bannedLen, frequent = frequent ,names=['a','b','c','d','e'], score = round(((float(vocab)*20)+float(confidenceResult))/2, 2))
 
 

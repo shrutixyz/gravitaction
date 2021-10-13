@@ -120,8 +120,17 @@
           opacity: 0.8;
         }
 
+        .popup h5 {
+          color: #f1f1f1;
+          opacity: 0.7;
+        }
+
         .hide {
           display: none;
+        }
+
+        .pace, .confidence, .vocab-index, .filler-word, .banned-words {
+          cursor: pointer;
         }
 
         </style>
@@ -129,9 +138,9 @@
     <h1 style="margin-left: 3rem;">Performance Analysis</h1>
     <h1 style="float: right; margin-right: 3rem; margin-top: -3rem;">Score: <span style="color: white;">{{score}}/100</span></h1>
     <center><div class="flex-container">
-        <div><p class="ptop" >Pace</p> <br><p class="pbottom">{{paceResult}} words/min</p></div>
-        <div><p class="ptop">Confidence</p> <br><p class="pbottom" style="margin-left: -6.7rem;">{{ confidence }}</p></div>
-        <div><p class="ptop">Grammatical Errors</p> <br><p class="pbottom" style="margin-left: -5rem;">{{ grammarLen }}</p></div>
+        <div class="pace"><p class="ptop" >Pace</p> <br><p class="pbottom">{{paceResult}} words/min</p></div>
+        <div class="confidence"><p class="ptop">Confidence</p> <br><p class="pbottom" style="margin-left: -6.7rem;">{{ confidence }}</p></div>
+        <div class="grammar"><p class="ptop">Grammatical Errors</p> <br><p class="pbottom" style="margin-left: -5rem;">{{ grammarLen }}</p></div>
       </div></center>
       <br><br>
       <h1 style="margin-left: 3rem; font-size: smaller;">Most frequently used words</h1>
@@ -152,7 +161,7 @@
       <br>
       <center>
         <div class="flex-container2">
-          <div>
+          <div class="vocab-index">
             <p class="ptop">Vocabulary Index</p><br>
             <div class="inside">
               <p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{vocab}}</p>
@@ -162,7 +171,7 @@
             <p class="ptop">Filler Word Count</p><br>
             <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{fillerLen}}</p></div>
           </div>
-          <div>
+          <div class="banned-words">
             <p class="ptop" style="width: 90%;">Banned Words Count</p><br>
             <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{ bannedLen }}</p></div>
             </div>
@@ -171,6 +180,11 @@
       <br><br><br>
 </body>
 <script>
+  const paceDiv = document.querySelector('.pace');
+  const confidenceDiv = document.querySelector('.confidence');
+  const grammarDiv = document.querySelector('.grammar');
+  const vocabDiv = document.querySelector('.vocab-index')
+  const bannedDiv = document.querySelector('.banned-words')
   const graphDiv = document.querySelector('.graph');
   const popupDiv = document.querySelector('.popup');
   const fillerDiv = document.querySelector('.filler-word');
@@ -238,6 +252,69 @@
 
   });
 
+  //pace div popup
+  paceDiv.addEventListener('click', e => {
+
+    var innePace = `
+       <h3>Pace</h3>
+        <p>Speech pace is simply the speed at which you speak. It’s calculated in the number of words spoken in a minute (wpm.)</p>
+        <br>
+        <h4>Speech rate guidelines:</h4>
+        <ul>
+          <li> Slow: less than 110 wpm </li>
+          <li> Conversational: between 120 wpm and 150 wpm. </li>
+          <li>Fast: more than 160 wpm </li>
+        </ul>
+
+        
+
+    `
+
+    popupDiv.innerHTML = innePace;
+    popupDiv.classList.remove('hide');
+
+  })
+
+//confidence div popup
+confidenceDiv.addEventListener('click', e => {
+
+var innerConfidence = `
+   <h3>Confidence</h3>
+    <p>Confidence is calculated on the basic of your facial expressions. The score is low when the expressions are too stiff or when there's too much of movement indicating nervousness.</p>
+    <p>It is calculated on the scale of 0 to 100</p>
+`
+
+popupDiv.innerHTML = innerConfidence;
+popupDiv.classList.remove('hide');
+
+})
+
+
+//vocab div popup
+vocabDiv.addEventListener('click', e => {
+
+var innervocab = `
+   <h3>Vocabulary Index</h3>
+    <p>Vocab is calculated on the scale of 0 to 10. Higher the number of rich words in speech, higher is the score.</p>
+`
+
+popupDiv.innerHTML = innervocab;
+popupDiv.classList.remove('hide');
+
+})
+
+//banned div popup
+bannedDiv.addEventListener('click', e => {
+
+var innerbanned = `
+   <h3>Banned Words</h3>
+    <p>Banned words include words that offensive or derogatory. It is important to be mindful of the choice of words you make while giving presentations.</p>
+`
+
+popupDiv.innerHTML = innerbanned;
+popupDiv.classList.remove('hide');
+
+})
 
   //most freq words popup 
   
@@ -260,7 +337,7 @@
         popupDiv.innerHTML = `
           <h3> ${f[currindex][0]}  </h3>
           <p>Times repeated: ${f[currindex][1]} </p>
-          <h6>You could have used these words instead</h6>
+          <h5>You could have used these words instead</h5>
           <br>
           ${s}
         `
@@ -289,7 +366,7 @@
         popupDiv.innerHTML = `
           <h3> ${f[currindex][0]}  </h3>
           <p>Times repeated: ${f[currindex][1]} </p>
-          <h6>You could have used these words instead</h6>
+          <h5>You could have used these words instead</h5>
           <br>
           ${s}
         `
@@ -318,7 +395,7 @@
         popupDiv.innerHTML = `
           <h3> ${f[currindex][0]}  </h3>
           <p>Times repeated: ${f[currindex][1]} </p>
-          <h6>You could have used these words instead</h6>
+          <h5>You could have used these words instead</h5>
           <br>
           ${s}
         `
@@ -347,7 +424,7 @@
         popupDiv.innerHTML = `
           <h3> ${f[currindex][0]}  </h3>
           <p>Times repeated: ${f[currindex][1]} </p>
-          <h6>You could have used these words instead</h6>
+          <h5>You could have used these words instead</h5>
           <br>
           ${s}
         `
@@ -376,7 +453,7 @@
         popupDiv.innerHTML = `
           <h3> ${f[currindex][0]}  </h3>
           <p>Times repeated: ${f[currindex][1]} </p>
-          <h6>You could have used these words instead</h6>
+          <h5>You could have used these words instead</h5>
           <br>
           ${s}
         `
