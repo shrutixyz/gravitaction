@@ -50,11 +50,12 @@ def grammar_check(text):
 
 
 def pace(text, time):
+    # text = text.replace(".", "")
     words = split_words(text)
     total_words = len(words)
 
     limit = (total_words / time) * 60
-
+    print(words)
     return limit
 
 
@@ -64,6 +65,7 @@ def tone(text):
 def preprocess(text):
     #set stop words
     pre = []
+    text = text.replace(".", "")
     stop_words = set(stopwords.words('english'))
 
     words = nltk.word_tokenize(text)
@@ -100,17 +102,15 @@ def get_common_words(text):
         lines.append(l[:-1])
             
     words = preprocess(text)
-    blacklist = []
+    # blacklist = []
     for word in words:
         if word not in lines and not bool(re.search(r'\d', word)) and bool(re.match('^[a-zA-Z0-9]*$',word)):
-            if word in vocab:
-                vocab.remove(word)
-                blacklist.append(word)
-            elif word not in vocab and word not in blacklist:
+            
+            if word not in vocab:
                 vocab.append(word)
     
     numerator = len(vocab)
-    print(vocab)
+    print(vocab, "ye rahi aampki vocab")
     temp = split_words(text)
     
     
@@ -121,7 +121,7 @@ def get_common_words(text):
     # multuply by 100 to get percentage and since 10% == 0.9, multiply the result by 0.09 ===> multiply by 100 * 0.09
     initial_index = (numerator / denominator) * 9
 
-    print(initial_index, 'love')
+    # print(initial_index, 'love')
     if initial_index < 0.2:
         initial_index = 0.2
     elif initial_index > 0.9:
@@ -177,7 +177,7 @@ def most_frequently_words(text):
 
     if len(ans) > 5:
         ans = ans[:5]
-    
+    print(ans, "aur ye rahi freq")
     return ans
     
 
@@ -188,7 +188,7 @@ def getsynonyms(word):
     for syn in wordnet.synsets(word):
         for lm in syn.lemmas():
                 synonyms.append(lm.name())#adding into synonyms
-    return (set(synonyms))
+    return (list(synonyms))
 
 
 def banned_words(text):
@@ -201,6 +201,6 @@ def banned_words(text):
     return count 
 
 # print(most_frequently_words(text))
-print(getsynonyms("apprehensive"))
+# print(getsynonyms("apprehensive"))
 
     

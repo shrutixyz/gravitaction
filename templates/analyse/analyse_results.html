@@ -13,12 +13,16 @@
 
 <body>
     <style>
+
+        
+        
         .flex-container {
             width: 100%;
             align-items: center;
             align-self: center;
             justify-content: space-around;
             display: flex;
+            
           /* flex-wrap: nowrap; */
          /* background-color: pink; */
         }
@@ -95,13 +99,31 @@
 
         .popup {
           position: absolute;
-          width: 80px;
-          height: 80px;
+          width: fit-content;
+          max-width: 50rem;
+          height: auto;
           left: 50%;
           right: 50%;
           transform: translate(-50%, -50%);
-          background-color: aqua;
+          background-color: #252528;
+          padding: 2rem 1.5rem;
+          border-radius: 25px;
+          box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.148)
         }
+
+        .popup h3 {
+          color: #f1f1f1;
+        }
+
+        .popup h4 {
+          color: #f1f1f1;
+          opacity: 0.8;
+        }
+
+        .hide {
+          display: none;
+        }
+
         </style>
     <br><br>
     <h1 style="margin-left: 3rem;">Performance Analysis</h1>
@@ -116,20 +138,18 @@
       <div class="barchart">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 
-<div class="graph">
-<!-- <div class="first common">
-  <p class="graph-text">{{names[0]}}</p>
-</div> -->
-<div class="second common">
-  <!-- <p class="graph-text">{{names[1]}}</p> -->
-</div>
-<!-- <div class="third common"><p class="graph-text">{{names[2]}}</p></div> -->
-<!-- <div class="fourth common"><p class="graph-text">{{names[3]}}</p></div> -->
-<!-- <div class="fifth common"><p class="graph-text">{{names[4]}}</p></div> -->
-</div>
+<div class="graph"></div>
       </div>
-      <div class="popup"></div>
-      <br><br>
+      <div class="popup hide">
+        <h3>Filler Words</h3>
+        <p>A filler word is any meaningless sound, word, or phrase used during speech to fill silence. They’re often used in lieu of pausing and are closely connected with hesitation in speech.When used too frequently, filler words are considered a speech disfluency</p>
+        <br>
+        <h4>Filler words found in your speech were:</h4>
+        <p>Basically</p>
+        <p>Basically</p>
+        <p>Basically</p>
+      </div>
+      <br>
       <center>
         <div class="flex-container2">
           <div>
@@ -138,7 +158,7 @@
               <p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{vocab}}</p>
             </div>
           </div>
-          <div>
+          <div class="filler-word">
             <p class="ptop">Filler Word Count</p><br>
             <div class="inside"><p style="color: white; font-size: 3rem; float: left; margin-top: 2rem; margin-left: 3rem;">{{fillerLen}}</p></div>
           </div>
@@ -151,24 +171,220 @@
       <br><br><br>
 </body>
 <script>
-  const graphDiv = document.querySelector('.graph')
+  const graphDiv = document.querySelector('.graph');
+  const popupDiv = document.querySelector('.popup');
+  const fillerDiv = document.querySelector('.filler-word');
+
   const ref = ['first', 'second', 'third', 'fourth', 'fifth']
   var f = {{ frequent | tojson }}
   let w;
-  let maxf = f[0][1]
-  let innerGraph = ""
-  f.map((element, index) => {
-    w = element[1] * 90 / maxf
-    innerGraph += `
-    <div class="${ref[index]} common" style="width: ${w}%;">
-      <p class="graph-text">${element[0]}</p>
-    </div>
-    
-    
+
+  if(f.length > 0) {
+    let maxf = f[0][1]
+    let innerGraph = ""
+    f.map((element, index) => {
+      w = element[1] * 90 / maxf
+      innerGraph += `
+      <div class="${ref[index]} common" id="${ref[index]}" data-index="${index}" style="width: ${w}%;">
+        <p class="graph-text">${element[0]}</p>
+      </div>
+      
+      
+      `
+    })
+
+    graphDiv.innerHTML = innerGraph;
+
+  } else {
+    let innerGraph = `
+    <p>We did not find any word with frquency exceeding beyond one!</p>
     `
+    
+  }
+  
+
+  popupDiv.addEventListener('click', e => {
+    if (!popupDiv.classList.contains('hide')){
+      popupDiv.classList.add('hide')
+    }
   })
 
-  graphDiv.innerHTML = innerGraph;
+  //filler word popup
+  fillerDiv.addEventListener('click', e => {
+    let filler = {{ fillerList | tojson }};
+
+    var innerFiller = `
+       <h3>Filler Words</h3>
+        <p>A filler word is any meaningless sound, word, or phrase used during speech to fill silence. They’re often used in lieu of pausing and are closely connected with hesitation in speech.When used too frequently, filler words are considered a speech disfluency</p>
+        <br>
+        <h4>Filler words found in your speech were:</h4>
+
+    `
+    if(filler.length > 0){
+
+      filler.map((element) => {
+        innerFiller +=  `
+        <p>${element}</p>
+        `
+      })
+    } else {
+      innerFiller += `
+      <p>No filler words found!</p>
+      `
+    }
+
+    popupDiv.innerHTML = innerFiller;
+    popupDiv.classList.remove('hide');
+
+  });
+
+
+  //most freq words popup 
+  
+  const first = document.getElementById('first')
+  let synonyms = {{synonyms|tojson}}
+  // console.log(synonyms, "syn baby")
+  if(first) {
+      first.addEventListener('click', e => {
+        console.log('click')
+        let currindex = first.getAttribute('data-index');
+        let currsyn = synonyms[currindex]
+        console.log(currsyn)
+        let s = ""
+        currsyn.map(element => {
+          s += `
+          <p> ${element} </p>
+          `
+        })
+
+        popupDiv.innerHTML = `
+          <h3> ${f[currindex][0]}  </h3>
+          <p>Times repeated: ${f[currindex][1]} </p>
+          <h6>You could have used these words instead</h6>
+          <br>
+          ${s}
+        `
+        popupDiv.classList.remove('hide')
+      })
+
+    
+  }
+
+  const second = document.getElementById('second')
+  // let synonyms = {{synonyms|tojson}}
+  // console.log(synonyms, "syn baby")
+  if(second) {
+      second.addEventListener('click', e => {
+        console.log('click')
+        let currindex = second.getAttribute('data-index');
+        let currsyn = synonyms[currindex]
+        console.log(currsyn)
+        let s = ""
+        currsyn.map(element => {
+          s += `
+          <p> ${element} </p>
+          `
+        })
+
+        popupDiv.innerHTML = `
+          <h3> ${f[currindex][0]}  </h3>
+          <p>Times repeated: ${f[currindex][1]} </p>
+          <h6>You could have used these words instead</h6>
+          <br>
+          ${s}
+        `
+        popupDiv.classList.remove('hide')
+      })
+
+    
+  }
+
+  const third = document.getElementById('third')
+  // let synonyms = {{synonyms|tojson}}
+  // console.log(synonyms, "syn baby")
+  if(third) {
+      third.addEventListener('click', e => {
+        console.log('click')
+        let currindex = third.getAttribute('data-index');
+        let currsyn = synonyms[currindex]
+        console.log(currsyn)
+        let s = ""
+        currsyn.map(element => {
+          s += `
+          <p> ${element} </p>
+          `
+        })
+
+        popupDiv.innerHTML = `
+          <h3> ${f[currindex][0]}  </h3>
+          <p>Times repeated: ${f[currindex][1]} </p>
+          <h6>You could have used these words instead</h6>
+          <br>
+          ${s}
+        `
+        popupDiv.classList.remove('hide')
+      })
+
+    
+  }
+
+  const fourth = document.getElementById('fourth')
+  // let synonyms = {{synonyms|tojson}}
+  // console.log(synonyms, "syn baby")
+  if(fourth) {
+      fourth.addEventListener('click', e => {
+        console.log('click')
+        let currindex = fourth.getAttribute('data-index');
+        let currsyn = synonyms[currindex]
+        console.log(currsyn)
+        let s = ""
+        currsyn.map(element => {
+          s += `
+          <p> ${element} </p>
+          `
+        })
+
+        popupDiv.innerHTML = `
+          <h3> ${f[currindex][0]}  </h3>
+          <p>Times repeated: ${f[currindex][1]} </p>
+          <h6>You could have used these words instead</h6>
+          <br>
+          ${s}
+        `
+        popupDiv.classList.remove('hide')
+      })
+
+    
+  }
+
+  const fifth = document.getElementById('fifth')
+  // let synonyms = {{synonyms|tojson}}
+  // console.log(synonyms, "syn baby")
+  if(fifth) {
+      fifth.addEventListener('click', e => {
+        console.log('click')
+        let currindex = fifth.getAttribute('data-index');
+        let currsyn = synonyms[currindex]
+        console.log(currsyn)
+        let s = ""
+        currsyn.map(element => {
+          s += `
+          <p> ${element} </p>
+          `
+        })
+
+        popupDiv.innerHTML = `
+          <h3> ${f[currindex][0]}  </h3>
+          <p>Times repeated: ${f[currindex][1]} </p>
+          <h6>You could have used these words instead</h6>
+          <br>
+          ${s}
+        `
+        popupDiv.classList.remove('hide')
+      })
+
+    
+  }
 
 
 
