@@ -37,7 +37,7 @@ Before <br>
 <br><br>After <br>
 ![image](https://user-images.githubusercontent.com/69726390/136959603-c6e7d4ea-55f9-4e0e-9be0-db2f9a0c4986.png)
 
-## Results after performing anaylysis of speech/presentation
+## Results after performing analysis of speech/presentation
 
 ![image](https://user-images.githubusercontent.com/69726390/136960483-bed9b0f8-6076-4b13-a21f-7fa65cccc6b6.png) <br>
 ![image](https://user-images.githubusercontent.com/69726390/136960513-d87814d9-bc39-4c7d-9c97-7e9e83816d12.png)
